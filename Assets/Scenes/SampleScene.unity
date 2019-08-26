@@ -39485,7 +39485,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &103871464
 RectTransform:
   m_ObjectHideFlags: 0
@@ -40025,7 +40025,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1657308104}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -40041,6 +40042,7 @@ GameObject:
   - component: {fileID: 676684825}
   - component: {fileID: 676684824}
   - component: {fileID: 676684823}
+  - component: {fileID: 676684826}
   m_Layer: 5
   m_Name: Upgrades
   m_TagString: Untagged
@@ -40113,14 +40115,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_MethodName: 
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
@@ -40161,6 +40163,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 676684821}
   m_CullTransparentMesh: 0
+--- !u!114 &676684826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 676684821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d90964676c12a438beafb0afae1b05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameObjectToToggle: {fileID: 103871463}
 --- !u!1 &710877073
 GameObject:
   m_ObjectHideFlags: 0
@@ -50445,6 +50460,56 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1657308103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1657308104}
+  - component: {fileID: 1657308105}
+  m_Layer: 0
+  m_Name: CameraManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1657308104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657308103}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 570157877}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1657308105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657308103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 909d6ea1b5af0784697f87d7dfca9940, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraObject: {fileID: 519420031}
+  mainSpeed: 20
+  shiftAdd: 250
+  maxShift: 1000
+  camSens: 0.25
+  maxZoom: 0.5
+  minZoom: 20
 --- !u!114 &1788221325 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5778768768557415141, guid: 0ef66ed930433bb4ea7eb547fc3a60a3,
@@ -50579,6 +50644,16 @@ PrefabInstance:
       propertyPath: m_Text
       value: Tier 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5778768768557415141, guid: 0ef66ed930433bb4ea7eb547fc3a60a3,
+        type: 3}
+      propertyPath: myUpgradeDependancies.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778768768557415141, guid: 0ef66ed930433bb4ea7eb547fc3a60a3,
+        type: 3}
+      propertyPath: myUpgradeDependancies.Array.data[0]
+      value: 
+      objectReference: {fileID: 1788221325}
     - target: {fileID: 1191404981460037204, guid: 0ef66ed930433bb4ea7eb547fc3a60a3,
         type: 3}
       propertyPath: m_Name
@@ -50615,16 +50690,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7791084148066773035, guid: 0ef66ed930433bb4ea7eb547fc3a60a3,
-        type: 3}
-      propertyPath: myUpgradeDependancies.Array.data[0]
-      value: 
-      objectReference: {fileID: 1788221325}
-    - target: {fileID: 5778768768557415141, guid: 0ef66ed930433bb4ea7eb547fc3a60a3,
-        type: 3}
-      propertyPath: myUpgradeDependancies.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5778768768557415141, guid: 0ef66ed930433bb4ea7eb547fc3a60a3,
         type: 3}
       propertyPath: myUpgradeDependancies.Array.data[0]
       value: 
@@ -50879,6 +50944,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5778768768557415141, guid: 0ef66ed930433bb4ea7eb547fc3a60a3,
+        type: 3}
+      propertyPath: initialPurchaseState
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1191404981460037204, guid: 0ef66ed930433bb4ea7eb547fc3a60a3,
         type: 3}
       propertyPath: m_IsActive
@@ -50898,11 +50968,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Administration
-      objectReference: {fileID: 0}
-    - target: {fileID: 5778768768557415141, guid: 0ef66ed930433bb4ea7eb547fc3a60a3,
-        type: 3}
-      propertyPath: initialPurchaseState
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2089519091903293691, guid: 0ef66ed930433bb4ea7eb547fc3a60a3,
         type: 3}
