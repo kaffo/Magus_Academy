@@ -40507,9 +40507,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f077d865939ad54e892c832e37c840f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: SmallDorm
-  tileMapToDraw: {fileID: 1479077834}
+  buildingName: SmallDorm
   ghostTilemap: {fileID: 1909530336}
+  prefabToSpawn: {fileID: 1844516241410683986, guid: 970f71dfadb3b02429b543a7f552b60b,
+    type: 3}
   xSize: 2
   ySize: 3
   buildingTiles:
@@ -40519,7 +40520,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c777879a940470f4c8bedb2ec9188146, type: 2}
   - {fileID: 11400000, guid: 0b959c44050c3f54db754d18f51ec0ad, type: 2}
   - {fileID: 11400000, guid: 79bdbc5de1737914283ea2e4d9a095fa, type: 2}
-  ghostPreview: 0
 --- !u!224 &1344007333 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6864943544227511364, guid: 0ef66ed930433bb4ea7eb547fc3a60a3,
@@ -50930,6 +50930,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1960225939}
+  - component: {fileID: 1960225940}
   m_Layer: 0
   m_Name: BuildingManager
   m_TagString: Untagged
@@ -50952,6 +50953,23 @@ Transform:
   m_Father: {fileID: 570157877}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1960225940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960225938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be107ccd35f04c4fb55c9af071a598b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingsDict:
+    m_keys: 00000000
+    m_values:
+    - {fileID: 1325928165}
+  buildingsMap: {fileID: 1479077834}
 --- !u!1 &2022765981
 GameObject:
   m_ObjectHideFlags: 0

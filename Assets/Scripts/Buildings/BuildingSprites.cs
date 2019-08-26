@@ -6,21 +6,19 @@ using UnityEngine.Tilemaps;
 [ExecuteInEditMode]
 public class BuildingSprites : MonoBehaviour
 {
-    public string name = "Default";
+    public string buildingName = "Default";
 
     [Header("References")]
-    public Tilemap tileMapToDraw;
     public Tilemap ghostTilemap;
+    public GameObject prefabToSpawn;
 
     [Header("Settings")]
     public int xSize = 1;
     public int ySize = 1;
     public List<TileBase> buildingTiles;
 
-    [HideInInspector()]
-    public bool ghostPreview = false;
 
-    private bool previousGhostPreview = false;
+    private bool ghostPreview = false;
     private Vector3Int previousPos = new Vector3Int();
     private void OnValidate()
     {
@@ -32,7 +30,7 @@ public class BuildingSprites : MonoBehaviour
 
     private void Start()
     {
-        if (tileMapToDraw == null || ghostTilemap == null)
+        if (ghostTilemap == null || prefabToSpawn == null)
         {
             Debug.LogError(this.name + " on " + this.gameObject + " has not been setup correctly!");
             this.enabled = false;
@@ -40,7 +38,7 @@ public class BuildingSprites : MonoBehaviour
         } 
     }
 
-    public void PlaceBuilding(Tilemap gridToUse, int x, int y)
+    public void PlaceBuilding(Tilemap gridToUse, int x, int y, bool createBuildingPrefab = false)
     {
         Vector3Int[] positionsArray = new Vector3Int[xSize * ySize];
 
@@ -63,26 +61,28 @@ public class BuildingSprites : MonoBehaviour
         }
 
         gridToUse.SetTiles(positionsArray, buildingTiles.ToArray());
+
+        if (createBuildingPrefab)
+            Instantiate(prefabToSpawn, new Vector3(x, y, 0), new Quaternion(), transform);
+    }
+
+    public void setGhostPreview(bool newGhostPreview)
+    {
+        ghostPreview = newGhostPreview;
+        if (!ghostPreview) { ghostTilemap.ClearAllTiles(); }
     }
 
     private void Update()
     {
-
         if (ghostPreview)
         {
-            Vector3Int position = tileMapToDraw.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            Vector3Int position = ghostTilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             if (previousPos != position)
             {
                 ghostTilemap.ClearAllTiles();
                 PlaceBuilding(ghostTilemap, position.x, position.y);
                 previousPos = position;
             }
-        }
-
-        if (ghostPreview != previousGhostPreview)
-        {
-            previousGhostPreview = ghostPreview;
-            if (!ghostPreview) { ghostTilemap.ClearAllTiles(); }
         }
     }
 }
