@@ -13,7 +13,7 @@ public enum BUILDINGS
 [Serializable]
 public class BuildingsScriptsDictionary : SerializableDictionary<BUILDINGS, BuildingSprites> { }
 
-public class BuildingPlacement : MonoBehaviour
+public class BuildingPlacement : Singleton<BuildingPlacement>
 {
     [SerializeField]
     public BuildingsScriptsDictionary buildingsDict;

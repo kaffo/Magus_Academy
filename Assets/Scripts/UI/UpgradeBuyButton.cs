@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonActiveToggle : MonoBehaviour
+public class UpgradeBuyButton : MonoBehaviour
 {
-    public GameObject gameObjectToToggle;
-    public List<GameObject> gameObjectsToHide;
-
+    public PERMITS myPermit;
     private Button myButton;
-  
+
     private void Start()
     {
         myButton = this.GetComponent<Button>();
-        if (myButton == null || gameObjectToToggle == null)
+        if (myButton == null)
         {
             Debug.LogError(this.name + " on " + this.gameObject + " has not been setup correctly!");
             this.enabled = false;
@@ -24,13 +22,6 @@ public class ButtonActiveToggle : MonoBehaviour
 
     private void MyButtonOnClick()
     {
-        gameObjectToToggle.SetActive(!gameObjectToToggle.activeInHierarchy);
-        if (gameObjectsToHide.Count > 0)
-        {
-            foreach (GameObject gameObjectToHide in gameObjectsToHide)
-            {
-                gameObjectToHide.SetActive(false);
-            }
-        }
+        PermitsManager.Instance.EnablePermit(myPermit);
     }
 }

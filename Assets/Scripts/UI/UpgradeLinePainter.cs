@@ -22,8 +22,8 @@ public class UpgradeLinePainter : MonoBehaviour
         {
             foreach (UpgradeDependancy childUpgradeDependancy in parentUpgradeDependancy.myUpgradeDependancies)
             {
-                Debug.Log("Parent " + parentUpgradeDependancy.gameObject.name + " pos: " + parentUpgradeDependancy.transform.position);
-                Debug.Log("Child " + childUpgradeDependancy.gameObject.name + " pos: " + childUpgradeDependancy.transform.position + '\n');
+                //Debug.Log("Parent " + parentUpgradeDependancy.gameObject.name + " pos: " + parentUpgradeDependancy.transform.position);
+                //Debug.Log("Child " + childUpgradeDependancy.gameObject.name + " pos: " + childUpgradeDependancy.transform.position + '\n');
 
                 GameObject lineGameobject = Instantiate(linePrefabGameObject, transform);
 
