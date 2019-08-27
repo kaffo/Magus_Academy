@@ -29,7 +29,7 @@ public class BuildingPlacement : Singleton<BuildingPlacement>
             buildingsDict[selectedBuilding].setGhostPreview(true);
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && selectedBuilding != BUILDINGS.NONE)
         {
             buildingsDict[selectedBuilding].setGhostPreview(false);
             selectedBuilding = BUILDINGS.NONE;

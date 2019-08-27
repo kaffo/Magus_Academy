@@ -8,20 +8,14 @@ public class StudentManager : Singleton<StudentManager>
     public int currentStudentNumber = 0; //TODO replace with list of students
 
     public GameObject studentUiPanel;
-    public GameObject studentUiPrefab;
 
     private void Start()
     {
-        if (studentUiPanel == null || studentUiPrefab == null)
+        if (studentUiPanel == null)
         {
             Debug.LogError(this.name + " on " + this.gameObject + " has not been setup correctly!");
             this.enabled = false;
             return;
-        }
-
-        for (int i = 0; i < 30; i++)
-        {
-            Instantiate(studentUiPrefab, studentUiPanel.transform);
         }
     }
 }
