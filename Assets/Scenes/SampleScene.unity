@@ -40471,7 +40471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d7151cf3a0429d41923ad7265cde51a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  studentPoolScript: {fileID: 1094154566}
+  studentPoolScript: {fileID: 1097602017}
   studentInfoFramePrefab: {fileID: 4240158783816425971, guid: cf2749d53594ce04c82e70858c25b73f,
     type: 3}
   studentPoolTrackerDict:
@@ -40816,6 +40816,159 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710877073}
   m_CullTransparentMesh: 0
+--- !u!1 &716540308
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 716540309}
+  - component: {fileID: 716540311}
+  - component: {fileID: 716540310}
+  m_Layer: 0
+  m_Name: NavMesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &716540309
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716540308}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 727138107}
+  m_Father: {fileID: 2066221018}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &716540310
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716540308}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -30.942316, y: 20.089413}
+      - {x: -30.832851, y: -20.02807}
+      - {x: 26.985807, y: -20.147966}
+      - {x: 26.976097, y: 20.027138}
+--- !u!114 &716540311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716540308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f01b895e078212419b3a7c52085d19e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstaclesMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  autoRegenerateInterval: 60
+  radiusOffset: 0.1
+  invertMasterPolygon: 1
+--- !u!1 &727138106
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 727138107}
+  - component: {fileID: 727138109}
+  - component: {fileID: 727138108}
+  m_Layer: 0
+  m_Name: TestHouse
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &727138107
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727138106}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 6.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 716540309}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &727138108
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727138106}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 4, y: 5}
+  m_EdgeRadius: 0
+--- !u!114 &727138109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727138106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 1
+  extraOffset: 0
+  invertPolygon: 0
 --- !u!1 &737556822
 GameObject:
   m_ObjectHideFlags: 0
@@ -41174,7 +41327,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1094154565}
-  - component: {fileID: 1094154566}
   m_Layer: 0
   m_Name: SelectionPool
   m_TagString: Untagged
@@ -41196,21 +41348,6 @@ Transform:
   m_Father: {fileID: 1097602016}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1094154566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1094154564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfd6085d03327e24e9e7d78d41e62093, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pooledStudentPrefab: {fileID: 5491684836729291893, guid: 9b07412bd6b8b91469a9362bfda12a2a,
-    type: 3}
-  studentInfoFrameManagerScript: {fileID: 534461920}
 --- !u!1 &1097602015
 GameObject:
   m_ObjectHideFlags: 0
@@ -41253,12 +41390,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1097602015}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f2c4e39289ad4748ab29789dcdd4c03, type: 3}
+  m_Script: {fileID: 11500000, guid: bfd6085d03327e24e9e7d78d41e62093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentStudentCapacity: 0
-  currentStudentNumber: 0
-  studentUiPanel: {fileID: 534461916}
+  pooledStudentPrefab: {fileID: 5491684836729291893, guid: 9b07412bd6b8b91469a9362bfda12a2a,
+    type: 3}
+  enrolledStudentPrefab: {fileID: 9153124987905076147, guid: aad80fcbc3db5664fb2224c08ca6383c,
+    type: 3}
+  studentInfoFrameManagerScript: {fileID: 534461920}
+  navMesh: {fileID: 716540311}
+  selectionPoolGameObject: {fileID: 1094154564}
+  enrolledGameObject: {fileID: 1030055125}
 --- !u!1 &1105027794
 GameObject:
   m_ObjectHideFlags: 0
@@ -53224,6 +53367,7 @@ Transform:
   - {fileID: 281807539}
   - {fileID: 1479077832}
   - {fileID: 47142325}
+  - {fileID: 716540309}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

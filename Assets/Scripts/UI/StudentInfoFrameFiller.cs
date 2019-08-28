@@ -95,4 +95,9 @@ public class StudentInfoFrameFiller : MonoBehaviour
                 break;
         }
     }
+
+    public void EnrollStudent()
+    {
+        StudentPool.Instance.EnrollStudent(myStudentStatsReference);
+    }
 }

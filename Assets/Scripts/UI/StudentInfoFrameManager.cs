@@ -24,33 +24,38 @@ public class StudentInfoFrameManager : MonoBehaviour
 
     public void RefreshStudentInfoUI()
     {
-        List<StudentStats> pooledStudentStats = new List<StudentStats>(studentPoolScript.transform.GetComponentsInChildren<StudentStats>());
+        List<StudentStats> pooledStudentStats = new List<StudentStats>(studentPoolScript.selectionPoolGameObject.transform.GetComponentsInChildren<StudentStats>());
 
+        bool removed = false;
         // Remove any pooled entries which have been deleted etc
         foreach (StudentStats existingStudent in studentPoolTrackerDict.Keys)
         {
             if (!pooledStudentStats.Contains(existingStudent)) {
                 Destroy(studentPoolTrackerDict[existingStudent].gameObject);
                 studentPoolTrackerDict.Remove(existingStudent);
-                continue;
+                removed = true;
+                break;
             }
         }
-
-        // Add any new entries which didn't exist before
-        foreach (StudentStats pooledStudentStat in pooledStudentStats)
+        if (removed) { RefreshStudentInfoUI(); }
+        else
         {
-            if (!studentPoolTrackerDict.ContainsKey(pooledStudentStat)) {
-                GameObject studentFrameGameObject = Instantiate(studentInfoFramePrefab, transform);
-                StudentInfoFrameFiller studentInfoScript = studentFrameGameObject.GetComponent<StudentInfoFrameFiller>();
+            // Add any new entries which didn't exist before
+            foreach (StudentStats pooledStudentStat in pooledStudentStats)
+            {
+                if (!studentPoolTrackerDict.ContainsKey(pooledStudentStat))
+                {
+                    GameObject studentFrameGameObject = Instantiate(studentInfoFramePrefab, transform);
+                    StudentInfoFrameFiller studentInfoScript = studentFrameGameObject.GetComponent<StudentInfoFrameFiller>();
 
-                if (studentInfoScript) {
-                    studentPoolTrackerDict.Add(pooledStudentStat, studentInfoScript);
-                    studentInfoScript.myStudentStatsReference = pooledStudentStat;
-                    studentInfoScript.enabled = true;
+                    if (studentInfoScript)
+                    {
+                        studentPoolTrackerDict.Add(pooledStudentStat, studentInfoScript);
+                        studentInfoScript.myStudentStatsReference = pooledStudentStat;
+                        studentInfoScript.enabled = true;
+                    }
                 }
             }
         }
-
-
     }
 }
