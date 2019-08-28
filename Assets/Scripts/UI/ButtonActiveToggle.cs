@@ -24,7 +24,6 @@ public class ButtonActiveToggle : MonoBehaviour
 
     private void MyButtonOnClick()
     {
-        gameObjectToToggle.SetActive(!gameObjectToToggle.activeInHierarchy);
         if (gameObjectsToHide.Count > 0)
         {
             foreach (GameObject gameObjectToHide in gameObjectsToHide)
@@ -32,5 +31,6 @@ public class ButtonActiveToggle : MonoBehaviour
                 gameObjectToHide.SetActive(false);
             }
         }
+        gameObjectToToggle.SetActive(!gameObjectToToggle.activeInHierarchy);
     }
 }
