@@ -6,7 +6,12 @@ using UnityEngine.Tilemaps;
 [ExecuteInEditMode]
 public class BuildingSprites : MonoBehaviour
 {
+    [Header("Building Stats")]
     public string buildingName = "Default";
+    public int price = 1000;
+    [TextArea]
+    public string description = "Empty Description";
+    public Sprite buildingImage;
 
     [Header("References")]
     public Tilemap ghostTilemap;
