@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmallDormitory : MonoBehaviour
+public class Dormitory : MonoBehaviour
 {
     public int capacity = 10;
 

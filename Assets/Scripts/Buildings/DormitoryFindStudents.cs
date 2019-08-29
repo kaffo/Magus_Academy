@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SmallDormitory))]
+[RequireComponent(typeof(Dormitory))]
 public class DormitoryFindStudents : MonoBehaviour
 {
-    private SmallDormitory myDormitoryScript
+    private Dormitory myDormitoryScript
     {
         get
         {
-            return gameObject.GetComponent<SmallDormitory>();
+            return gameObject.GetComponent<Dormitory>();
         }
     }
 

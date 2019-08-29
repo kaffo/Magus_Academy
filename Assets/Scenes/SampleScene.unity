@@ -53927,8 +53927,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraObject: {fileID: 519420031}
   mainSpeed: 20
-  shiftAdd: 250
-  maxShift: 1000
+  shiftAdd: 30
+  maxShift: 40
   camSens: 0.25
   maxZoom: 0.5
   minZoom: 20

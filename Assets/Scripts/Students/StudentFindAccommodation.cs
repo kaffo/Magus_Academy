@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(StudentStats))]
 public class StudentFindAccommodation : MonoBehaviour
 {
-    public SmallDormitory myDormitory;
+    public Dormitory myDormitory;
     public StudentStats myStudentStats
     {
         get
@@ -17,9 +17,9 @@ public class StudentFindAccommodation : MonoBehaviour
     private void Start()
     {
         GameObject dormitoryObject = BuildingPlacement.Instance.domitoryPoolObject;
-        List<SmallDormitory> dormitories = new List<SmallDormitory>(dormitoryObject.GetComponentsInChildren<SmallDormitory>());
+        List<Dormitory> dormitories = new List<Dormitory>(dormitoryObject.GetComponentsInChildren<Dormitory>());
 
-        foreach (SmallDormitory currentDormitory in dormitories)
+        foreach (Dormitory currentDormitory in dormitories)
         {
             if (currentDormitory.AccommodationSpaceRemaining() > 0)
             {
