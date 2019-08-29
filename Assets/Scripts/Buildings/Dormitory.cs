@@ -8,10 +8,22 @@ public class Dormitory : MonoBehaviour
 
     public List<StudentStats> boardingStudents;
     private List<GameObject> studentsInside;
+    private GameTime gameTime;
 
     private void Awake()
     {
         studentsInside = new List<GameObject>(capacity);
+        gameTime = TimeManager.Instance.currentTime;
+    }
+
+    private void OnEnable()
+    {
+        gameTime.OnHourIncrement += OnHourChange;
+    }
+
+    private void OnDisable()
+    {
+        gameTime.OnHourIncrement += OnHourChange;
     }
 
     public void StudentEnter(GameObject studentGameObject)
@@ -31,6 +43,18 @@ public class Dormitory : MonoBehaviour
         {
             Debug.LogWarning("Student " + studentGameObject.name + " tried to exit " + gameObject.name + " and failed");
         }
+    }
+
+    private void OnHourChange()
+    {
+        if (gameTime.hours == 7)
+        {
+            List<GameObject> studentsToRemove = new List<GameObject>(studentsInside);
+            foreach (GameObject studentGameObject in studentsToRemove)
+            {
+                StudentExit(studentGameObject);
+            }
+        } 
     }
 
     public int AccommodationSpaceRemaining()
