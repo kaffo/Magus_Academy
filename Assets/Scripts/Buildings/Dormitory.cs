@@ -9,6 +9,11 @@ public class Dormitory : MonoBehaviour
     public List<StudentStats> boardingStudents;
     private List<GameObject> studentsInside;
 
+    private void Awake()
+    {
+        studentsInside = new List<GameObject>(capacity);
+    }
+
     public void StudentEnter(GameObject studentGameObject)
     {
         studentsInside.Add(studentGameObject);
