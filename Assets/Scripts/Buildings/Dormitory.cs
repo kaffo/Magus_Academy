@@ -47,7 +47,7 @@ public class Dormitory : MonoBehaviour
 
     private void OnHourChange()
     {
-        if (gameTime.hours == 7)
+        if (TimeManager.Instance.GetCurrentTimeslot() != TIMESLOT.SLEEPING && studentsInside.Count > 0)
         {
             List<GameObject> studentsToRemove = new List<GameObject>(studentsInside);
             foreach (GameObject studentGameObject in studentsToRemove)

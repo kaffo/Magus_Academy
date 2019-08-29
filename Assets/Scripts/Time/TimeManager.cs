@@ -27,7 +27,7 @@ public class GameTime
         } else
         {
             minutes += minsToAdd;
-            if (minsToAdd > 0) { OnMinuteIncrement(); }
+            OnMinuteIncrement();
         }
     }
 
@@ -40,7 +40,7 @@ public class GameTime
         } else
         {
             hours += hoursToAdd;
-            if (hoursToAdd > 0) { OnHourIncrement(); }
+            OnHourIncrement();
         }
     }
 
@@ -54,7 +54,7 @@ public class GameTime
         else
         {
             day += daysToAdd;
-            if (daysToAdd > 0) { OnDayIncrement(); }
+            OnDayIncrement();
         }
     }
 
@@ -64,14 +64,30 @@ public class GameTime
     }
 }
 
+public enum TIMESLOT
+{
+    NONE = -1,
+    SLEEPING,
+    TEACHING
+}
+
 public class TimeManager : Singleton<TimeManager>
 {
     public float rateOfTime = 0.1f;
+    public List<TIMESLOT> timeslotsSetup = new List<TIMESLOT>();
     [HideInInspector()]
     public GameTime currentTime = new GameTime();
 
     private Coroutine timePassCoroutine;
 
+    private void Awake()
+    {
+        for (int i = 0; i < 24; i++)
+        {
+            if (i < 7 || i > 19) { timeslotsSetup.Add(TIMESLOT.SLEEPING); }
+            else { timeslotsSetup.Add(TIMESLOT.NONE); }
+        }
+    }
 
     private void OnEnable()
     {
@@ -92,5 +108,10 @@ public class TimeManager : Singleton<TimeManager>
             currentTime.AddMinutes(1);
             yield return new WaitForSeconds(rateOfTime);
         }
+    }
+
+    public TIMESLOT GetCurrentTimeslot()
+    {
+        return timeslotsSetup[currentTime.hours];
     }
 }

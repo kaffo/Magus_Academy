@@ -7,6 +7,12 @@ public class StudentCapacityTracker : MonoBehaviour
 {
     public Text studentCapacityText;
 
+    private void Awake()
+    {
+        StudentPool.Instance.OnStudentCapacityChange += StudentCapacityChangeHandler;
+        StudentPool.Instance.OnEnrolledStudentChange += EnrolledStudentChangeHandler;
+    }
+
     private void Start()
     {
         if (studentCapacityText == null)
@@ -15,8 +21,6 @@ public class StudentCapacityTracker : MonoBehaviour
             this.enabled = false;
             return;
         }
-        StudentPool.Instance.OnStudentCapacityChange += StudentCapacityChangeHandler;
-        StudentPool.Instance.OnEnrolledStudentChange += EnrolledStudentChangeHandler;
     }
 
     private void StudentCapacityChangeHandler(int newCapacity)

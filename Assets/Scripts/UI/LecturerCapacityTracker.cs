@@ -7,6 +7,12 @@ public class LecturerCapacityTracker : MonoBehaviour
 {
     public Text lecturerCapacityText;
 
+    private void Awake()
+    {
+        LecturerManager.Instance.OnLecturerCapacityChange += LecturerCapacityChangeHandler;
+        LecturerManager.Instance.OnHiredLecturerChange += EnrolledLecturerChangeHandler;
+    }
+
     private void Start()
     {
         if (lecturerCapacityText == null)
@@ -15,8 +21,6 @@ public class LecturerCapacityTracker : MonoBehaviour
             this.enabled = false;
             return;
         }
-        LecturerManager.Instance.OnLecturerCapacityChange += LecturerCapacityChangeHandler;
-        LecturerManager.Instance.OnHiredLecturerChange += EnrolledLecturerChangeHandler;
     }
 
     private void LecturerCapacityChangeHandler(int newCapacity)

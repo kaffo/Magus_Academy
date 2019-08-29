@@ -49,8 +49,8 @@ public class StudentMovement : MonoBehaviour
         //myPolyNavAgent.OnDestinationInvalid += MoveRandom;
         gameTime.OnHourIncrement += OnHourChange;
 
-        if (gameTime.hours > 6 && gameTime.hours < 20) { currentBehaviour = STUDENT_BEHAVIOUR.Wandering; }
-        else { currentBehaviour = STUDENT_BEHAVIOUR.Sleeping; }
+        if (TimeManager.Instance.GetCurrentTimeslot() == TIMESLOT.SLEEPING) { currentBehaviour = STUDENT_BEHAVIOUR.Sleeping; }
+        else { currentBehaviour = STUDENT_BEHAVIOUR.Wandering; }
     }
 
     void OnDisable()
@@ -79,11 +79,11 @@ public class StudentMovement : MonoBehaviour
 
     private void OnHourChange()
     {
-        if (gameTime.hours == 20)
+        if (TimeManager.Instance.GetCurrentTimeslot() == TIMESLOT.SLEEPING && currentBehaviour != STUDENT_BEHAVIOUR.Sleeping)
         {
             currentBehaviour = STUDENT_BEHAVIOUR.Sleeping;
             myPolyNavAgent.Stop();
-        } else if (gameTime.hours == 7)
+        } else if (TimeManager.Instance.GetCurrentTimeslot() != TIMESLOT.SLEEPING && currentBehaviour == STUDENT_BEHAVIOUR.Sleeping)
         {
             currentBehaviour = STUDENT_BEHAVIOUR.Wandering;
             myPolyNavAgent.Stop();
