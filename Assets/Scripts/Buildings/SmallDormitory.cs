@@ -6,7 +6,30 @@ public class SmallDormitory : MonoBehaviour
 {
     public int capacity = 10;
 
-    public int currentStudents = 0; //Placeholder to student list
+    public List<StudentStats> boardingStudents;
+    private List<GameObject> studentsInside;
 
+    public void StudentEnter(GameObject studentGameObject)
+    {
+        studentsInside.Add(studentGameObject);
+        studentGameObject.SetActive(false);
+    }
 
+    public void StudentExit(GameObject studentGameObject)
+    {
+        if (studentsInside.Contains(studentGameObject))
+        {
+            studentsInside.Remove(studentGameObject);
+            studentGameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning("Student " + studentGameObject.name + " tried to exit " + gameObject.name + " and failed");
+        }
+    }
+
+    public int AccommodationSpaceRemaining()
+    {
+        return capacity - boardingStudents.Count;
+    }
 }

@@ -24,11 +24,14 @@ public class BuildingPlacement : Singleton<BuildingPlacement>
     public GameObject buildingInfoContentParent;
     public GameObject buildingInfoFramePrefab;
 
+    [Header("Internal References")]
+    public GameObject domitoryPoolObject;
+
     private BUILDINGS selectedBuilding = BUILDINGS.NONE;
 
     private void Start()
     {
-        if (buildingsMap == null || buildingInfoContentParent == null || buildingInfoFramePrefab == null)
+        if (buildingsMap == null || buildingInfoContentParent == null || buildingInfoFramePrefab == null || domitoryPoolObject == null)
         {
             Debug.LogError(this.name + " on " + this.gameObject + " has not been setup correctly!");
             this.enabled = false;

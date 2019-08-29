@@ -255,7 +255,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WPoints:
-  - {x: 3, y: 5}
-  - {x: -2, y: 8}
-  - {x: -4, y: -3}
+  - {x: 10, y: 10}
+  - {x: 10, y: -10}
+  - {x: 10, y: 0}
+  - {x: -15, y: 3}
+  - {x: -17, y: 9}
   delayBetweenPoints: 5

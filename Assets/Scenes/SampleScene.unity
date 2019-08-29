@@ -55542,6 +55542,7 @@ MonoBehaviour:
   buildingInfoContentParent: {fileID: 1759365028}
   buildingInfoFramePrefab: {fileID: 5908085121995211761, guid: c196721b8cec7fc4d89e4c5b5428960b,
     type: 3}
+  domitoryPoolObject: {fileID: 1325928163}
 --- !u!1 &1983268122
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7142517445317514550}
   - component: {fileID: 5436492946330246451}
   - component: {fileID: 3274101714844753232}
+  - component: {fileID: 9138986839196719621}
   m_Layer: 0
   m_Name: SmallDormitory
   m_TagString: Untagged
@@ -46,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   capacity: 10
-  currentStudents: 0
+  boardingStudents: []
 --- !u!114 &5436492946330246451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,3 +89,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 3}
   m_EdgeRadius: 0
+--- !u!114 &9138986839196719621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844516241410683986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60d8e4e26b1297847a26a65868779ce9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
