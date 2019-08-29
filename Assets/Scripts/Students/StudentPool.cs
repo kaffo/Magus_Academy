@@ -47,6 +47,7 @@ public class StudentPool : Singleton<StudentPool>
         }
 
         AddStudentsToPool(7);
+        OnStudentCapacityChange(m_currentStudentCapacity);
     }
 
     public void AddStudentsToPool(int numToAdd)
