@@ -21,6 +21,9 @@ public class FlyCamera : MonoBehaviour
     public float maxZoom = 0.5f;
     public float minZoom = 20f;
 
+    [HideInInspector()]
+    public bool disableScroll = false;
+
     private Vector3 lastMouse = new Vector3(255, 255, 255); //kind of in the middle of the screen, rather than at the top (play)
     private float totalRun = 1.0f;
     private Transform cameraTransform;
@@ -46,7 +49,7 @@ public class FlyCamera : MonoBehaviour
         //Mouse  camera angle done.  
 
         float ScrollWheelChange = Input.GetAxis("Mouse ScrollWheel");           //This little peece of code is written by JelleWho https://github.com/jellewie
-        if (ScrollWheelChange != 0)
+        if (ScrollWheelChange != 0 && !disableScroll)
         {                                            //If the scrollwheel has changed
             float R = ScrollWheelChange * 15;                                   //The radius from current camera
             cameraObject.orthographicSize -= R;

@@ -68,7 +68,8 @@ public enum TIMESLOT
 {
     NONE = -1,
     SLEEPING,
-    TEACHING
+    TEACHING,
+    EATING
 }
 
 public class TimeManager : Singleton<TimeManager>
@@ -86,6 +87,7 @@ public class TimeManager : Singleton<TimeManager>
         {
             if (i < 7 || i > 19) { timeslotsSetup.Add(TIMESLOT.SLEEPING); }
             else if (i == 11 || i == 15 || i == 16) { timeslotsSetup.Add(TIMESLOT.TEACHING); }
+            else if (i == 12 || i == 13) { timeslotsSetup.Add(TIMESLOT.EATING); }
             else { timeslotsSetup.Add(TIMESLOT.NONE); }
         }
     }

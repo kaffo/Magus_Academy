@@ -7,6 +7,7 @@ enum STUDENT_BEHAVIOUR
 {
     None = -1,
     Sleeping,
+    Eating,
     Wandering,
     Learning,
     Mischief
@@ -20,19 +21,19 @@ public class StudentMovement : MonoBehaviour
     public int xBound = 30;
     public int yBound = 30;
 
+    public PolyNavAgent myPolyNavAgent
+    {
+        get
+        {
+            return gameObject.GetComponent<PolyNavAgent>();
+        }
+    }
+
     private StudentStats myStudentStats
     {
         get
         {
             return gameObject.GetComponent<StudentStats>();
-        }
-    }
-
-    private PolyNavAgent myPolyNavAgent
-    {
-        get
-        {
-            return gameObject.GetComponent<PolyNavAgent>();
         }
     }
 
@@ -47,7 +48,8 @@ public class StudentMovement : MonoBehaviour
     private GameTime gameTime;
     private STUDENT_BEHAVIOUR currentBehaviour = STUDENT_BEHAVIOUR.Wandering;
 
-    private Classroom currentClassroom;
+    private Classroom currentClassroom = null;
+    private FoodHall currentFoodhall = null;
 
     private void Awake()
     {
@@ -84,6 +86,9 @@ public class StudentMovement : MonoBehaviour
                 break;
             case STUDENT_BEHAVIOUR.Learning:
                 FindAndPathToClassroom();
+                break;
+            case STUDENT_BEHAVIOUR.Eating:
+                FindAndPathToFoodhall();
                 break;
             default:
                 WanderNearby();
@@ -124,6 +129,11 @@ public class StudentMovement : MonoBehaviour
         else if (TimeManager.Instance.GetCurrentTimeslot() == TIMESLOT.TEACHING && currentBehaviour != STUDENT_BEHAVIOUR.Learning)
         {
             currentBehaviour = STUDENT_BEHAVIOUR.Learning;
+            myPolyNavAgent.Stop();
+        }
+        else if (TimeManager.Instance.GetCurrentTimeslot() == TIMESLOT.EATING && currentBehaviour != STUDENT_BEHAVIOUR.Eating)
+        {
+            currentBehaviour = STUDENT_BEHAVIOUR.Eating;
             myPolyNavAgent.Stop();
         }
     }
@@ -170,6 +180,35 @@ public class StudentMovement : MonoBehaviour
         myPolyNavAgent.SetDestination(destination);
     }
 
+    private void FindAndPathToFoodhall()
+    {
+        if (!currentFoodhall)
+        {
+            List<FoodHall> allFoodhalls = new List<FoodHall>(BuildingPlacement.Instance.corePoolObject.GetComponentsInChildren<FoodHall>());
+            foreach (FoodHall foodHall in allFoodhalls)
+            {
+                if (foodHall.ReservePlace(myPolyNavAgent))
+                {
+                    currentFoodhall = foodHall;
+                    break;
+                }
+            }
+        }
+
+        if (!currentFoodhall)
+        {
+            Debug.LogWarning("Student couldn't find a foodhall to eat in");
+            currentBehaviour = STUDENT_BEHAVIOUR.Wandering;
+            return;
+        }
+
+        myPolyNavAgent.maxSpeed = 4;
+        Vector3 foodLocation = currentFoodhall.transform.position;
+        Vector2 destination = new Vector2(foodLocation.x, foodLocation.y);
+
+        myPolyNavAgent.SetDestination(destination);
+    }
+
     private void ReachedDestination()
     {
         switch (currentBehaviour)
@@ -181,8 +220,12 @@ public class StudentMovement : MonoBehaviour
                 myStudentAccommodationScript.myDormitory.StudentEnter(this);
                 break;
             case STUDENT_BEHAVIOUR.Learning:
-                if (currentClassroom) { }
+                if (currentClassroom)
                     currentClassroom.StudentEnter(this);
+                break;
+            case STUDENT_BEHAVIOUR.Eating:
+                if (currentFoodhall)
+                    currentFoodhall.StudentEnter(this);
                 break;
             default:
                 WanderNearby();

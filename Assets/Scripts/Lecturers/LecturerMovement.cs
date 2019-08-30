@@ -7,6 +7,7 @@ enum LECTURER_BEHAVIOUR
 {
     None = -1,
     Sleeping,
+    Eating,
     Wandering,
     Teaching,
     Research
@@ -20,19 +21,19 @@ public class LecturerMovement : MonoBehaviour
     public int xBound = 30;
     public int yBound = 30;
 
+    public PolyNavAgent myPolyNavAgent
+    {
+        get
+        {
+            return gameObject.GetComponent<PolyNavAgent>();
+        }
+    }
+
     private LecturerStats myLecturerStats
     {
         get
         {
             return gameObject.GetComponent<LecturerStats>();
-        }
-    }
-
-    private PolyNavAgent myPolyNavAgent
-    {
-        get
-        {
-            return gameObject.GetComponent<PolyNavAgent>();
         }
     }
 
@@ -46,6 +47,7 @@ public class LecturerMovement : MonoBehaviour
 
     private GameTime gameTime;
     private LECTURER_BEHAVIOUR currentBehaviour = LECTURER_BEHAVIOUR.Wandering;
+    private FoodHall currentFoodhall = null;
 
     private void Awake()
     {
@@ -82,6 +84,9 @@ public class LecturerMovement : MonoBehaviour
                 break;
             case LECTURER_BEHAVIOUR.Teaching:
                 FindAndPathToClassroom();
+                break;
+            case LECTURER_BEHAVIOUR.Eating:
+                FindAndPathToFoodhall();
                 break;
             default:
                 WanderNearby();
@@ -124,6 +129,11 @@ public class LecturerMovement : MonoBehaviour
             currentBehaviour = LECTURER_BEHAVIOUR.Teaching;
             myPolyNavAgent.Stop();
         }
+        else if (TimeManager.Instance.GetCurrentTimeslot() == TIMESLOT.EATING && currentBehaviour != LECTURER_BEHAVIOUR.Eating)
+        {
+            currentBehaviour = LECTURER_BEHAVIOUR.Eating;
+            myPolyNavAgent.Stop();
+        }
     }
 
     private void WanderNearby()
@@ -138,14 +148,14 @@ public class LecturerMovement : MonoBehaviour
 
     private void ReturnToDormitory()
     {
-        if (!myLecturerAccommodationScript.myDormitory)
+        if (!myLecturerAccommodationScript.myAccommodation)
         {
             currentBehaviour = LECTURER_BEHAVIOUR.Wandering;
             return;
         }
 
         myPolyNavAgent.maxSpeed = 4;
-        Vector3 dormLocation = myLecturerAccommodationScript.myDormitory.transform.position;
+        Vector3 dormLocation = myLecturerAccommodationScript.myAccommodation.transform.position;
         Vector2 destination = new Vector2(dormLocation.x + 1, dormLocation.y - 2);
 
         myPolyNavAgent.SetDestination(destination);
@@ -167,6 +177,35 @@ public class LecturerMovement : MonoBehaviour
         myPolyNavAgent.SetDestination(destination);
     }
 
+    private void FindAndPathToFoodhall()
+    {
+        if (!currentFoodhall)
+        {
+            List<FoodHall> allFoodhalls = new List<FoodHall>(BuildingPlacement.Instance.corePoolObject.GetComponentsInChildren<FoodHall>());
+            foreach (FoodHall foodHall in allFoodhalls)
+            {
+                if (foodHall.ReservePlace(myPolyNavAgent))
+                {
+                    currentFoodhall = foodHall;
+                    break;
+                }
+            }
+        }
+
+        if (!currentFoodhall)
+        {
+            Debug.LogWarning("Lecturer couldn't find a foodhall to eat in");
+            currentBehaviour = LECTURER_BEHAVIOUR.Wandering;
+            return;
+        }
+
+        myPolyNavAgent.maxSpeed = 4;
+        Vector3 foodLocation = currentFoodhall.transform.position;
+        Vector2 destination = new Vector2(foodLocation.x , foodLocation.y);
+
+        myPolyNavAgent.SetDestination(destination);
+    }
+
     private void ReachedDestination()
     {
         switch(currentBehaviour)
@@ -175,10 +214,16 @@ public class LecturerMovement : MonoBehaviour
                 WanderNearby();
                 break;
             case LECTURER_BEHAVIOUR.Sleeping:
+                if (myLecturerAccommodationScript.myAccommodation)
+                    myLecturerAccommodationScript.myAccommodation.LecturerEnter(this);
                 break;
             case LECTURER_BEHAVIOUR.Teaching:
                 if (myLecturerAccommodationScript.myClassroom)
                     myLecturerAccommodationScript.myClassroom.LecturerEnter(this);
+                break;
+            case LECTURER_BEHAVIOUR.Eating:
+                if (currentFoodhall)
+                    currentFoodhall.LecturerEnter(this);
                 break;
             default:
                 WanderNearby();

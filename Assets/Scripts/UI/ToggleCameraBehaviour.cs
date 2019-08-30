@@ -5,6 +5,7 @@ using UnityEngine;
 public class ToggleCameraBehaviour : MonoBehaviour
 {
     public FlyCamera cameraScript;
+    public bool onlyToggleScroll = false;
 
     private void Start()
     {
@@ -19,12 +20,29 @@ public class ToggleCameraBehaviour : MonoBehaviour
     private void OnEnable()
     {
         if (cameraScript)
-            cameraScript.enabled = false;
+        {
+            if (onlyToggleScroll)
+            {
+                cameraScript.disableScroll = true;
+            } else
+            {
+                cameraScript.enabled = false;
+            }
+        }
     }
 
     private void OnDisable()
     {
         if (cameraScript)
-            cameraScript.enabled = true;
+        {
+            if (onlyToggleScroll)
+            {
+                cameraScript.disableScroll = false;
+            }
+            else
+            {
+                cameraScript.enabled = true;
+            }
+        }
     }
 }

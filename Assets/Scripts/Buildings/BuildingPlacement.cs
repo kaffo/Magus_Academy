@@ -26,6 +26,7 @@ public class BuildingPlacement : Singleton<BuildingPlacement>
     public GameObject buildingInfoFramePrefab;
 
     [Header("Internal References")]
+    public GameObject corePoolObject;
     public GameObject domitoryPoolObject;
     public GameObject classroomPoolObject;
 
@@ -33,7 +34,7 @@ public class BuildingPlacement : Singleton<BuildingPlacement>
 
     private void Start()
     {
-        if (buildingsMap == null || buildingInfoContentParent == null || buildingInfoFramePrefab == null || domitoryPoolObject == null ||
+        if (buildingsMap == null || buildingInfoContentParent == null || buildingInfoFramePrefab == null || corePoolObject == null || domitoryPoolObject == null ||
             classroomPoolObject == null)
         {
             Debug.LogError(this.name + " on " + this.gameObject + " has not been setup correctly!");

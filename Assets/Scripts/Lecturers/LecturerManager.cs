@@ -46,7 +46,7 @@ public class LecturerManager : Singleton<LecturerManager>
             return;
         }
 
-        AddLecturersToPool(3);
+        AddLecturersToPool(5);
         OnLecturerCapacityChange(m_currentLecturerCapacity);
     }
 
