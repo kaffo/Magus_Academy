@@ -85,6 +85,7 @@ public class TimeManager : Singleton<TimeManager>
         for (int i = 0; i < 24; i++)
         {
             if (i < 7 || i > 19) { timeslotsSetup.Add(TIMESLOT.SLEEPING); }
+            else if (i == 11 || i == 15 || i == 16) { timeslotsSetup.Add(TIMESLOT.TEACHING); }
             else { timeslotsSetup.Add(TIMESLOT.NONE); }
         }
     }

@@ -2,11 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dormitory : MonoBehaviour
+public enum MAGIC_SCHOOL
+{
+    NONE = -1,
+    NATURE,
+    ELEMENTAL
+}
+
+public class Classroom : MonoBehaviour
 {
     public int capacity = 10;
+    public MAGIC_SCHOOL classroomType = MAGIC_SCHOOL.NATURE;
 
-    public List<StudentStats> boardingStudents;
     private List<StudentMovement> studentsInside;
     private GameTime gameTime;
 
@@ -47,18 +54,13 @@ public class Dormitory : MonoBehaviour
 
     private void OnHourChange()
     {
-        if (TimeManager.Instance.GetCurrentTimeslot() != TIMESLOT.SLEEPING && studentsInside.Count > 0)
+        if (TimeManager.Instance.GetCurrentTimeslot() != TIMESLOT.TEACHING && studentsInside.Count > 0)
         {
             List<StudentMovement> studentsToRemove = new List<StudentMovement>(studentsInside);
             foreach (StudentMovement studentGameObject in studentsToRemove)
             {
                 StudentExit(studentGameObject);
             }
-        } 
-    }
-
-    public int AccommodationSpaceRemaining()
-    {
-        return capacity - boardingStudents.Count;
+        }
     }
 }

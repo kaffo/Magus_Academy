@@ -3,13 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum STUDENT_DESIRES
-{
-    NONE = -1,
-    NATURE,
-    ELEMENTAL
-}
-
 public enum STUDENT_TRAITS
 {
     LAZY,
@@ -29,7 +22,7 @@ public class StudentStats : MonoBehaviour
 {
     public string studentName = "Student";
     public Sprite profilePicture;
-    public STUDENT_DESIRES studentDesire = STUDENT_DESIRES.NATURE;
+    public MAGIC_SCHOOL studentDesire = MAGIC_SCHOOL.NATURE;
     public List<STUDENT_TRAITS> studentTraits;
     public STUDENT_LOYALTY studentLoyalty = STUDENT_LOYALTY.INDIFFERENT;
 
@@ -42,6 +35,6 @@ public class StudentStats : MonoBehaviour
         }
 
         studentLoyalty = (STUDENT_LOYALTY)Random.Range(0, 3);
-        studentDesire = (STUDENT_DESIRES)Random.Range(0, 2);
+        studentDesire = (MAGIC_SCHOOL)Random.Range(0, 2);
     }
 }

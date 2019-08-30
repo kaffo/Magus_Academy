@@ -12,12 +12,21 @@ enum STUDENT_BEHAVIOUR
     Mischief
 }
 
+[RequireComponent(typeof(StudentStats))]
 [RequireComponent(typeof(PolyNavAgent))]
 [RequireComponent(typeof(StudentFindAccommodation))]
 public class StudentMovement : MonoBehaviour
 {
     public int xBound = 30;
     public int yBound = 30;
+
+    private StudentStats myStudentStats
+    {
+        get
+        {
+            return gameObject.GetComponent<StudentStats>();
+        }
+    }
 
     private PolyNavAgent myPolyNavAgent
     {
@@ -37,6 +46,8 @@ public class StudentMovement : MonoBehaviour
 
     private GameTime gameTime;
     private STUDENT_BEHAVIOUR currentBehaviour = STUDENT_BEHAVIOUR.Wandering;
+
+    private Classroom currentClassroom;
 
     private void Awake()
     {
@@ -71,9 +82,30 @@ public class StudentMovement : MonoBehaviour
             case STUDENT_BEHAVIOUR.Sleeping:
                 ReturnToDormitory();
                 break;
+            case STUDENT_BEHAVIOUR.Learning:
+                FindAndPathToClassroom();
+                break;
             default:
                 WanderNearby();
                 break;
+        }
+    }
+
+    public void HideStudent()
+    {
+        myPolyNavAgent.enabled = false;
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
+        }
+    }
+
+    public void ShowStudent()
+    {
+        myPolyNavAgent.enabled = true;
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(true);
         }
     }
 
@@ -83,9 +115,15 @@ public class StudentMovement : MonoBehaviour
         {
             currentBehaviour = STUDENT_BEHAVIOUR.Sleeping;
             myPolyNavAgent.Stop();
-        } else if (TimeManager.Instance.GetCurrentTimeslot() != TIMESLOT.SLEEPING && currentBehaviour == STUDENT_BEHAVIOUR.Sleeping)
+        }
+        else if (TimeManager.Instance.GetCurrentTimeslot() == TIMESLOT.NONE && currentBehaviour != STUDENT_BEHAVIOUR.Wandering)
         {
             currentBehaviour = STUDENT_BEHAVIOUR.Wandering;
+            myPolyNavAgent.Stop();
+        }
+        else if (TimeManager.Instance.GetCurrentTimeslot() == TIMESLOT.TEACHING && currentBehaviour != STUDENT_BEHAVIOUR.Learning)
+        {
+            currentBehaviour = STUDENT_BEHAVIOUR.Learning;
             myPolyNavAgent.Stop();
         }
     }
@@ -115,6 +153,23 @@ public class StudentMovement : MonoBehaviour
         myPolyNavAgent.SetDestination(destination);
     }
 
+    private void FindAndPathToClassroom()
+    {
+        currentClassroom = BuildingPlacement.Instance.FindClassroom(myStudentStats.studentDesire);
+        if (!currentClassroom)
+        {
+            Debug.LogWarning("Can't find a classroom for " + myStudentStats.studentDesire.ToString());
+            currentBehaviour = STUDENT_BEHAVIOUR.Wandering;
+            return;
+        }
+
+        myPolyNavAgent.maxSpeed = 4;
+        Vector3 classLocation = currentClassroom.transform.position;
+        Vector2 destination = new Vector2(classLocation.x + 2, classLocation.y - 4);
+
+        myPolyNavAgent.SetDestination(destination);
+    }
+
     private void ReachedDestination()
     {
         switch(currentBehaviour)
@@ -123,7 +178,11 @@ public class StudentMovement : MonoBehaviour
                 WanderNearby();
                 break;
             case STUDENT_BEHAVIOUR.Sleeping:
-                myStudentAccommodationScript.myDormitory.StudentEnter(gameObject);
+                myStudentAccommodationScript.myDormitory.StudentEnter(this);
+                break;
+            case STUDENT_BEHAVIOUR.Learning:
+                if (currentClassroom)
+                    currentClassroom.StudentEnter(this);
                 break;
             default:
                 WanderNearby();

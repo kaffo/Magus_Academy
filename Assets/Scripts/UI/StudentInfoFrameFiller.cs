@@ -34,10 +34,10 @@ public class StudentInfoFrameFiller : MonoBehaviour
         string desireText;
         switch (myStudentStatsReference.studentDesire)
         {
-            case STUDENT_DESIRES.ELEMENTAL:
+            case MAGIC_SCHOOL.ELEMENTAL:
                 desireText = "Elemental";
                 break;
-            case STUDENT_DESIRES.NATURE:
+            case MAGIC_SCHOOL.NATURE:
                 desireText = "Nature";
                 break;
             default:
