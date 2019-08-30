@@ -80,7 +80,7 @@ public class LecturerMovement : MonoBehaviour
                 WanderNearby();
                 break;
             case LECTURER_BEHAVIOUR.Sleeping:
-                ReturnToDormitory();
+                ReturnToAccomodation();
                 break;
             case LECTURER_BEHAVIOUR.Teaching:
                 FindAndPathToClassroom();
@@ -146,7 +146,7 @@ public class LecturerMovement : MonoBehaviour
         myPolyNavAgent.SetDestination(destination);
     }
 
-    private void ReturnToDormitory()
+    private void ReturnToAccomodation()
     {
         if (!myLecturerAccommodationScript.myAccommodation)
         {
@@ -156,7 +156,7 @@ public class LecturerMovement : MonoBehaviour
 
         myPolyNavAgent.maxSpeed = 4;
         Vector3 dormLocation = myLecturerAccommodationScript.myAccommodation.transform.position;
-        Vector2 destination = new Vector2(dormLocation.x + 1, dormLocation.y - 2);
+        Vector2 destination = new Vector2(dormLocation.x + 1, dormLocation.y);
 
         myPolyNavAgent.SetDestination(destination);
     }
@@ -172,7 +172,7 @@ public class LecturerMovement : MonoBehaviour
 
         myPolyNavAgent.maxSpeed = 4;
         Vector3 classLocation = myLecturerAccommodationScript.myClassroom.transform.position;
-        Vector2 destination = new Vector2(classLocation.x + 2, classLocation.y - 4);
+        Vector2 destination = new Vector2(classLocation.x + 2, classLocation.y );
 
         myPolyNavAgent.SetDestination(destination);
     }

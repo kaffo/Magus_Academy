@@ -62,7 +62,7 @@ public class BuildingSprites : MonoBehaviour
                 if (j + 1 < xSize) { previousPosition += new Vector3Int(1, 0, 0); }
                 else { previousPosition.x = x; }
             }
-            if (i + 1 < ySize) { previousPosition += new Vector3Int(0, -1, 0); }
+            if (i + 1 < ySize) { previousPosition += new Vector3Int(0, 1, 0); }
         }
 
         gridToUse.SetTiles(positionsArray, buildingTiles.ToArray());

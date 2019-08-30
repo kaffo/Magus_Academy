@@ -158,7 +158,7 @@ public class StudentMovement : MonoBehaviour
 
         myPolyNavAgent.maxSpeed = 4;
         Vector3 dormLocation = myStudentAccommodationScript.myDormitory.transform.position;
-        Vector2 destination = new Vector2(dormLocation.x + 1, dormLocation.y - 2);
+        Vector2 destination = new Vector2(dormLocation.x + 1, dormLocation.y);
 
         myPolyNavAgent.SetDestination(destination);
     }
@@ -175,7 +175,7 @@ public class StudentMovement : MonoBehaviour
 
         myPolyNavAgent.maxSpeed = 4;
         Vector3 classLocation = currentClassroom.transform.position;
-        Vector2 destination = new Vector2(classLocation.x + 2, classLocation.y - 4);
+        Vector2 destination = new Vector2(classLocation.x + 2, classLocation.y);
 
         myPolyNavAgent.SetDestination(destination);
     }
