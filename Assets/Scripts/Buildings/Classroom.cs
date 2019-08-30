@@ -13,13 +13,16 @@ public class Classroom : MonoBehaviour
 {
     public int capacity = 10;
     public MAGIC_SCHOOL classroomType = MAGIC_SCHOOL.NATURE;
+    public LecturerMovement myLecturer = null;
 
-    private List<StudentMovement> studentsInside;
+    private HashSet<StudentMovement> studentsInside;
+    private HashSet<LecturerMovement> lecturersInside;
     private GameTime gameTime;
 
     private void Awake()
     {
-        studentsInside = new List<StudentMovement>(capacity);
+        studentsInside = new HashSet<StudentMovement>();
+        lecturersInside = new HashSet<LecturerMovement>();
         gameTime = TimeManager.Instance.currentTime;
     }
 
@@ -52,6 +55,25 @@ public class Classroom : MonoBehaviour
         }
     }
 
+    public void LecturerEnter(LecturerMovement lecturerMoveScript)
+    {
+        lecturersInside.Add(lecturerMoveScript);
+        lecturerMoveScript.HideLecturer();
+    }
+
+    public void LecturerExit(LecturerMovement lecturerMoveScript)
+    {
+        if (lecturersInside.Contains(lecturerMoveScript))
+        {
+            lecturersInside.Remove(lecturerMoveScript);
+            lecturerMoveScript.ShowLecturer();
+        }
+        else
+        {
+            Debug.LogWarning("Lecturer " + lecturerMoveScript.name + " tried to exit " + gameObject.name + " and failed");
+        }
+    }
+
     private void OnHourChange()
     {
         if (TimeManager.Instance.GetCurrentTimeslot() != TIMESLOT.TEACHING && studentsInside.Count > 0)
@@ -60,6 +82,14 @@ public class Classroom : MonoBehaviour
             foreach (StudentMovement studentGameObject in studentsToRemove)
             {
                 StudentExit(studentGameObject);
+            }
+        }
+        if (TimeManager.Instance.GetCurrentTimeslot() != TIMESLOT.TEACHING && lecturersInside.Count > 0)
+        {
+            List<LecturerMovement> lecturersToRemove = new List<LecturerMovement>(lecturersInside);
+            foreach (LecturerMovement lecturerGameObject in lecturersToRemove)
+            {
+                LecturerExit(lecturerGameObject);
             }
         }
     }

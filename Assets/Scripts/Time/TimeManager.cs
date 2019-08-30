@@ -92,8 +92,7 @@ public class TimeManager : Singleton<TimeManager>
 
     private void OnEnable()
     {
-        if (timePassCoroutine == null)
-            timePassCoroutine = StartCoroutine(PassTime());
+        timePassCoroutine = StartCoroutine(PassTime());
     }
 
     private void OnDisable()

@@ -171,7 +171,8 @@ GameObject:
   - component: {fileID: 6307433517411460446}
   - component: {fileID: 9170765204439726224}
   - component: {fileID: 1701374674366269930}
-  - component: {fileID: 3710056664196605859}
+  - component: {fileID: 8316098730061838286}
+  - component: {fileID: 1480539033999157788}
   m_Layer: 0
   m_Name: HiredLecturer
   m_TagString: Untagged
@@ -242,7 +243,7 @@ MonoBehaviour:
   restrict: 0
   closerPointOnInvalid: 1
   debugPath: 1
---- !u!114 &3710056664196605859
+--- !u!114 &8316098730061838286
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -251,13 +252,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 9153124987905076147}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd97fcad6ef87a743a329f2e347bf220, type: 3}
+  m_Script: {fileID: 11500000, guid: eb294ba109c5a99419caba95eb4a14c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WPoints:
-  - {x: 10, y: 10}
-  - {x: 10, y: -10}
-  - {x: 10, y: 0}
-  - {x: -15, y: 3}
-  - {x: -17, y: 9}
-  delayBetweenPoints: 5
+  myDormitory: {fileID: 0}
+  myClassroom: {fileID: 0}
+--- !u!114 &1480539033999157788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9153124987905076147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8638bea82cf504686a436ca9dd0977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xBound: 30
+  yBound: 30

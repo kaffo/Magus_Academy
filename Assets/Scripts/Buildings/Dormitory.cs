@@ -7,12 +7,12 @@ public class Dormitory : MonoBehaviour
     public int capacity = 10;
 
     public List<StudentStats> boardingStudents;
-    private List<StudentMovement> studentsInside;
+    private HashSet<StudentMovement> studentsInside;
     private GameTime gameTime;
 
     private void Awake()
     {
-        studentsInside = new List<StudentMovement>(capacity);
+        studentsInside = new HashSet<StudentMovement>();
         gameTime = TimeManager.Instance.currentTime;
     }
 
