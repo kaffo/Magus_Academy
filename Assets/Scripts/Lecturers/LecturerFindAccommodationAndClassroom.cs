@@ -8,18 +8,20 @@ public class LecturerFindAccommodationAndClassroom : MonoBehaviour
 {
     public Dormitory myDormitory;
     public Classroom myClassroom;
+    [HideInInspector()]
+    public LecturerMovement myLecturerMovement
+    {
+        get
+        {
+            return gameObject.GetComponent<LecturerMovement>();
+        }
+    }
+
     private LecturerStats myLecturerStats
     {
         get
         {
             return gameObject.GetComponent<LecturerStats>();
-        }
-    }
-    private LecturerMovement myLecturerMovement
-    {
-        get
-        {
-            return gameObject.GetComponent<LecturerMovement>();
         }
     }
 
