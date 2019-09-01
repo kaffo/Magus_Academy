@@ -26,7 +26,7 @@ public class LecturerManager : Singleton<LecturerManager>
     [Header("References")]
     public GameObject pooledLecturerPrefab;
     public GameObject hiredLecturerPrefab;
-    public LecturerInfoFrameManager lecturerInfoFrameManagerScript;
+    public List<LecturerInfoFrameManager> lecturerInfoFrameManagerScripts;
     public PolyNav2D navMesh;
 
     [Header("Internal References")]
@@ -38,7 +38,7 @@ public class LecturerManager : Singleton<LecturerManager>
 
     private void Start()
     {
-        if (pooledLecturerPrefab == null || hiredLecturerPrefab == null || lecturerInfoFrameManagerScript == null || navMesh == null ||
+        if (pooledLecturerPrefab == null || hiredLecturerPrefab == null || navMesh == null ||
             selectionPoolGameObject == null || hiredPoolGameObject == null)
         {
             Debug.LogError(this.name + " on " + this.gameObject + " has not been setup correctly!");
@@ -59,7 +59,11 @@ public class LecturerManager : Singleton<LecturerManager>
             LecturerStats lecturerStats = lecturerObject.GetComponent<LecturerStats>();
             if (lecturerStats) { lecturerStats.RandomiseStats(); }
         }
-        lecturerInfoFrameManagerScript.RefreshLecturerInfoUI();
+
+        foreach (LecturerInfoFrameManager lecturerInfoManager in lecturerInfoFrameManagerScripts)
+        {
+            lecturerInfoManager.RefreshLecturerInfoUI();
+        }
     }
 
     public void HireLecturer(LecturerStats lecturerToHire)
@@ -101,7 +105,10 @@ public class LecturerManager : Singleton<LecturerManager>
     private IEnumerator RefreshAfterUpdate()
     {
         yield return new WaitForFixedUpdate();
-        lecturerInfoFrameManagerScript.RefreshLecturerInfoUI();
+        foreach (LecturerInfoFrameManager lecturerInfoManager in lecturerInfoFrameManagerScripts)
+        {
+            lecturerInfoManager.RefreshLecturerInfoUI();
+        }
     }
 
     public int GetLecturerPoolCount()

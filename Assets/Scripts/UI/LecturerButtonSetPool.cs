@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public class UpgradeBuyButton : MonoBehaviour
+public class LecturerButtonSetPool : MonoBehaviour
 {
-    public PERMITS myPermit;
+    public LecturerInfoFrameManager lecturerInfoFrameManager;
+    public bool usePooledLecturers = true;
     private Button myButton;
 
     private void Start()
@@ -23,6 +24,6 @@ public class UpgradeBuyButton : MonoBehaviour
 
     private void MyButtonOnClick()
     {
-        PermitsManager.Instance.EnablePermit(myPermit);
+        lecturerInfoFrameManager.usePooledLecturers = usePooledLecturers;
     }
 }

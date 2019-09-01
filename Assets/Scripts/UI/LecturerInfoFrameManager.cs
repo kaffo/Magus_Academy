@@ -11,6 +11,7 @@ public class LecturerInfoFrameManager : MonoBehaviour
     public LecturerManager lecturerManagerScript;
     public GameObject lecturerInfoFramePrefab;
     public LecturerStatsLecturerInfoDictionary lecturerPoolTrackerDict;
+    public bool usePooledLecturers = true;
 
     private void Start()
     {
@@ -24,7 +25,8 @@ public class LecturerInfoFrameManager : MonoBehaviour
 
     public void RefreshLecturerInfoUI()
     {
-        List<LecturerStats> pooledLecturerStats = new List<LecturerStats>(lecturerManagerScript.selectionPoolGameObject.transform.GetComponentsInChildren<LecturerStats>());
+        GameObject poolToUse = usePooledLecturers ? lecturerManagerScript.selectionPoolGameObject : lecturerManagerScript.hiredPoolGameObject;
+        List <LecturerStats> pooledLecturerStats = new List<LecturerStats>(poolToUse.transform.GetComponentsInChildren<LecturerStats>());
 
         bool removed = false;
         // Remove any pooled entries which have been deleted etc
