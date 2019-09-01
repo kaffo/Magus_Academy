@@ -17,6 +17,7 @@ public class LecturerInfoFrameFiller : MonoBehaviour
     public Text lecturerDesiresText;
     public Text lecturerTraitsText;
     public Image loyaltyImage;
+    public List<GameObject> enrolledObjectsToDisable;
 
     private void Start()
     {
@@ -26,6 +27,14 @@ public class LecturerInfoFrameFiller : MonoBehaviour
             Debug.LogError(this.name + " on " + this.gameObject + " has not been setup correctly!");
             this.enabled = false;
             return;
+        }
+
+        if (myLecturerStatsReference.isHired)
+        {
+            foreach (GameObject objectToDisable in enrolledObjectsToDisable)
+            {
+                objectToDisable.SetActive(false);
+            }
         }
 
         profileImage.sprite = myLecturerStatsReference.profilePicture;

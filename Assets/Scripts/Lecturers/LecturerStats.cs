@@ -37,6 +37,7 @@ public class LecturerStats : MonoBehaviour
     public MagicTypeFloatDictionary lecturerSkills;
     public List<LECTURER_TRAITS> lecturerTraits;
     public LECTURER_LOYALTY lecturerLoyalty = LECTURER_LOYALTY.INDIFFERENT;
+    public bool isHired = false;
 
     public void RandomiseStats()
     {

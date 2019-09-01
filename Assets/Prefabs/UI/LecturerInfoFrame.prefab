@@ -554,6 +554,9 @@ MonoBehaviour:
   lecturerDesiresText: {fileID: 932146756795880343}
   lecturerTraitsText: {fileID: 3910691697536130506}
   loyaltyImage: {fileID: 4425658714775585819}
+  enrolledObjectsToDisable:
+  - {fileID: 1371697281404769054}
+  - {fileID: 3348842007231677477}
 --- !u!1 &5131640478842661095
 GameObject:
   m_ObjectHideFlags: 0

@@ -76,6 +76,7 @@ public class LecturerManager : Singleton<LecturerManager>
         if (enrolledStats)
         {
             CopyClassValues(lecturerToHire, enrolledStats);
+            enrolledStats.isHired = true;
         }
 
         if (polyNavAgent)
