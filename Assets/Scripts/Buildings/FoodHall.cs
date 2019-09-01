@@ -20,16 +20,6 @@ public class FoodHall : MonoBehaviour
         gameTime = TimeManager.Instance.currentTime;
     }
 
-    private void OnEnable()
-    {
-        gameTime.OnHourIncrement += OnHourChange;
-    }
-
-    private void OnDisable()
-    {
-        gameTime.OnHourIncrement += OnHourChange;
-    }
-
     public bool ReservePlace(PolyNavAgent agentToReserve)
     {
         if (reserveList.Count < capacity)
@@ -84,26 +74,6 @@ public class FoodHall : MonoBehaviour
         else
         {
             Debug.LogWarning("Lecturer " + lecturerMoveScript.name + " tried to exit " + gameObject.name + " and failed");
-        }
-    }
-
-    private void OnHourChange()
-    {
-        if (TimeManager.Instance.GetCurrentTimeslot() != TIMESLOT.EATING && studentsInside.Count > 0)
-        {
-            List<StudentMovement> studentsToRemove = new List<StudentMovement>(studentsInside);
-            foreach (StudentMovement studentGameObject in studentsToRemove)
-            {
-                StudentExit(studentGameObject);
-            }
-        }
-        if (TimeManager.Instance.GetCurrentTimeslot() != TIMESLOT.EATING && lecturersInside.Count > 0)
-        {
-            List<LecturerMovement> lecturersToRemove = new List<LecturerMovement>(lecturersInside);
-            foreach (LecturerMovement lecturerGameObject in lecturersToRemove)
-            {
-                LecturerExit(lecturerGameObject);
-            }
         }
     }
 }

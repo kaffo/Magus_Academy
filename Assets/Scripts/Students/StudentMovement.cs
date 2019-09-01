@@ -116,21 +116,45 @@ public class StudentMovement : MonoBehaviour
 
     private void OnHourChange()
     {
+        // Inside a building
+        if (!myPolyNavAgent.enabled)
+        {
+            // Was learning, now leaving
+            if (currentBehaviour == STUDENT_BEHAVIOUR.Learning && TimeManager.Instance.GetCurrentTimeslot() != TIMESLOT.TEACHING && currentClassroom)
+            {
+                currentClassroom.StudentExit(this);
+            }
+            // Was sleeping, now leaving
+            else if (currentBehaviour == STUDENT_BEHAVIOUR.Sleeping && TimeManager.Instance.GetCurrentTimeslot() != TIMESLOT.SLEEPING && myStudentAccommodationScript.myDormitory)
+            {
+                myStudentAccommodationScript.myDormitory.StudentExit(this);
+            }
+            // Was eating, now leaving
+            else if (currentBehaviour == STUDENT_BEHAVIOUR.Eating && TimeManager.Instance.GetCurrentTimeslot() != TIMESLOT.EATING && currentFoodhall)
+            {
+                currentFoodhall.StudentExit(this);
+            }
+        }
+
+        // Time to sleep
         if (TimeManager.Instance.GetCurrentTimeslot() == TIMESLOT.SLEEPING && currentBehaviour != STUDENT_BEHAVIOUR.Sleeping)
         {
             currentBehaviour = STUDENT_BEHAVIOUR.Sleeping;
             myPolyNavAgent.Stop();
         }
+        // Nothing to do
         else if (TimeManager.Instance.GetCurrentTimeslot() == TIMESLOT.NONE && currentBehaviour != STUDENT_BEHAVIOUR.Wandering)
         {
             currentBehaviour = STUDENT_BEHAVIOUR.Wandering;
             myPolyNavAgent.Stop();
         }
+        // Time to go to class
         else if (TimeManager.Instance.GetCurrentTimeslot() == TIMESLOT.TEACHING && currentBehaviour != STUDENT_BEHAVIOUR.Learning)
         {
             currentBehaviour = STUDENT_BEHAVIOUR.Learning;
             myPolyNavAgent.Stop();
         }
+        // Time to eat
         else if (TimeManager.Instance.GetCurrentTimeslot() == TIMESLOT.EATING && currentBehaviour != STUDENT_BEHAVIOUR.Eating)
         {
             currentBehaviour = STUDENT_BEHAVIOUR.Eating;

@@ -16,16 +16,6 @@ public class LecturerAccommodation : MonoBehaviour
         gameTime = TimeManager.Instance.currentTime;
     }
 
-    private void OnEnable()
-    {
-        gameTime.OnHourIncrement += OnHourChange;
-    }
-
-    private void OnDisable()
-    {
-        gameTime.OnHourIncrement += OnHourChange;
-    }
-
     public void LecturerEnter(LecturerMovement lecturerMoveScript)
     {
         lecturersInside.Add(lecturerMoveScript);
@@ -43,18 +33,6 @@ public class LecturerAccommodation : MonoBehaviour
         {
             Debug.LogWarning("Lecturer " + lecturerMoveScript.name + " tried to exit " + gameObject.name + " and failed");
         }
-    }
-
-    private void OnHourChange()
-    {
-        if (TimeManager.Instance.GetCurrentTimeslot() != TIMESLOT.SLEEPING && lecturersInside.Count > 0)
-        {
-            List<LecturerMovement> lecturersToRemove = new List<LecturerMovement>(lecturersInside);
-            foreach (LecturerMovement lecturerGameObject in lecturersToRemove)
-            {
-                LecturerExit(lecturerGameObject);
-            }
-        } 
     }
 
     public int AccommodationSpaceRemaining()

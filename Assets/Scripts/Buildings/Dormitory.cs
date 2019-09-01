@@ -16,16 +16,6 @@ public class Dormitory : MonoBehaviour
         gameTime = TimeManager.Instance.currentTime;
     }
 
-    private void OnEnable()
-    {
-        gameTime.OnHourIncrement += OnHourChange;
-    }
-
-    private void OnDisable()
-    {
-        gameTime.OnHourIncrement += OnHourChange;
-    }
-
     public void StudentEnter(StudentMovement studentMoveScript)
     {
         studentsInside.Add(studentMoveScript);
@@ -43,18 +33,6 @@ public class Dormitory : MonoBehaviour
         {
             Debug.LogWarning("Student " + studentMoveScript.name + " tried to exit " + gameObject.name + " and failed");
         }
-    }
-
-    private void OnHourChange()
-    {
-        if (TimeManager.Instance.GetCurrentTimeslot() != TIMESLOT.SLEEPING && studentsInside.Count > 0)
-        {
-            List<StudentMovement> studentsToRemove = new List<StudentMovement>(studentsInside);
-            foreach (StudentMovement studentGameObject in studentsToRemove)
-            {
-                StudentExit(studentGameObject);
-            }
-        } 
     }
 
     public int AccommodationSpaceRemaining()

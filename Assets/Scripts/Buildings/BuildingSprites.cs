@@ -20,6 +20,9 @@ public class BuildingSprites : MonoBehaviour
     [Header("Settings")]
     public int xSize = 1;
     public int ySize = 1;
+    public bool useOffset = false;
+    public int xOffset = 0;
+    public int yOffset = 0;
     public List<TileBase> buildingTiles;
 
 
@@ -36,16 +39,14 @@ public class BuildingSprites : MonoBehaviour
     private void Start()
     {
         if (ghostTilemap == null || prefabToSpawn == null)
-        {
-            Debug.LogError(this.name + " on " + this.gameObject + " has not been setup correctly!");
-            this.enabled = false;
-            return;
-        } 
+            Debug.Log(this.name + " on " + this.gameObject + " may be missing an item");
     }
 
     public void PlaceBuilding(Tilemap gridToUse, int x, int y, bool createBuildingPrefab = false)
     {
         Vector3Int[] positionsArray = new Vector3Int[xSize * ySize];
+
+        if (useOffset) { x += xOffset; y += yOffset; }
 
         Vector3Int previousPosition = new Vector3Int(x, y, 0);
         int index = 0;

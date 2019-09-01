@@ -114,21 +114,45 @@ public class LecturerMovement : MonoBehaviour
 
     private void OnHourChange()
     {
+        // Inside a building
+        if (!myPolyNavAgent.enabled)
+        {
+            // Was teaching, time to leave
+            if (TimeManager.Instance.GetCurrentTimeslot() != TIMESLOT.TEACHING && currentBehaviour == LECTURER_BEHAVIOUR.Teaching  && myLecturerAccommodationScript.myClassroom)
+            {
+                myLecturerAccommodationScript.myClassroom.LecturerExit(this);
+            }
+            // Was teaching, time to leave
+            else if (TimeManager.Instance.GetCurrentTimeslot() != TIMESLOT.SLEEPING && currentBehaviour == LECTURER_BEHAVIOUR.Sleeping && myLecturerAccommodationScript.myAccommodation)
+            {
+                myLecturerAccommodationScript.myAccommodation.LecturerExit(this);
+            }
+            // Was eating, time to leave
+            else if (TimeManager.Instance.GetCurrentTimeslot() != TIMESLOT.EATING && currentBehaviour == LECTURER_BEHAVIOUR.Eating && currentFoodhall)
+            {
+                currentFoodhall.LecturerExit(this);
+            }
+        }
+
+        // Time to go to sleep
         if (TimeManager.Instance.GetCurrentTimeslot() == TIMESLOT.SLEEPING && currentBehaviour != LECTURER_BEHAVIOUR.Sleeping)
         {
             currentBehaviour = LECTURER_BEHAVIOUR.Sleeping;
             myPolyNavAgent.Stop();
         }
+        // Nothing to do
         else if (TimeManager.Instance.GetCurrentTimeslot() == TIMESLOT.NONE && currentBehaviour != LECTURER_BEHAVIOUR.Wandering)
         {
             currentBehaviour = LECTURER_BEHAVIOUR.Wandering;
             myPolyNavAgent.Stop();
         }
+        // Time to go teach
         else if (TimeManager.Instance.GetCurrentTimeslot() == TIMESLOT.TEACHING && currentBehaviour != LECTURER_BEHAVIOUR.Teaching)
         {
             currentBehaviour = LECTURER_BEHAVIOUR.Teaching;
             myPolyNavAgent.Stop();
         }
+        // Time to go eat
         else if (TimeManager.Instance.GetCurrentTimeslot() == TIMESLOT.EATING && currentBehaviour != LECTURER_BEHAVIOUR.Eating)
         {
             currentBehaviour = LECTURER_BEHAVIOUR.Eating;

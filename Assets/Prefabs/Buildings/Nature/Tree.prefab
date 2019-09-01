@@ -1,0 +1,167 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5444807990135476837
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5444807990135476836}
+  - component: {fileID: 5444807990135476834}
+  - component: {fileID: 5444807990135476835}
+  - component: {fileID: 5444807990135476832}
+  - component: {fileID: 5444807990135476833}
+  - component: {fileID: 5444807990135476838}
+  - component: {fileID: 5444807990135476839}
+  m_Layer: 0
+  m_Name: Tree
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5444807990135476836
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444807990135476837}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5444807990135476834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444807990135476837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 1
+  extraOffset: 0
+  invertPolygon: 0
+--- !u!61 &5444807990135476835
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444807990135476837}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1, y: 0.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &5444807990135476832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444807990135476837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f077d865939ad54e892c832e37c840f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingName: TreeBottom
+  price: 10
+  description: A tree. The Nature students love these things. So do the Elemental
+    students mind you...
+  buildingImage: {fileID: 21300000, guid: bc34ae7e0e03def4785cb6f95016e39a, type: 3}
+  ghostTilemap: {fileID: 0}
+  prefabToSpawn: {fileID: 0}
+  xSize: 2
+  ySize: 1
+  useOffset: 0
+  xOffset: 0
+  yOffset: 0
+  buildingTiles:
+  - {fileID: 11400000, guid: 56f43a65fe66c6840b1521b599111594, type: 2}
+  - {fileID: 11400000, guid: 7c5583db3c1b8c84b99571b0336a89f2, type: 2}
+--- !u!114 &5444807990135476833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444807990135476837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e6049d3b00cefe42b92fe455e384484, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileMapToDrawTo: {fileID: 0}
+  myBuildingSprites: {fileID: 5444807990135476832}
+--- !u!114 &5444807990135476838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444807990135476837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f077d865939ad54e892c832e37c840f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingName: TreeTop
+  price: 10
+  description: A tree. The Nature students love these things. So do the Elemental
+    students mind you...
+  buildingImage: {fileID: 21300000, guid: bc34ae7e0e03def4785cb6f95016e39a, type: 3}
+  ghostTilemap: {fileID: 0}
+  prefabToSpawn: {fileID: 0}
+  xSize: 2
+  ySize: 4
+  useOffset: 1
+  xOffset: 0
+  yOffset: 1
+  buildingTiles:
+  - {fileID: 11400000, guid: 4cdbaf9aa28d18e4ca8aff781b4f0c80, type: 2}
+  - {fileID: 11400000, guid: 336fa3e293cf7264bb3f1b2af3739e56, type: 2}
+  - {fileID: 11400000, guid: 11c42126c0312de408536411627a5d58, type: 2}
+  - {fileID: 11400000, guid: 058996a98b567e4419defed84de75128, type: 2}
+  - {fileID: 11400000, guid: 688de3c562318264084f7e691e46cb19, type: 2}
+  - {fileID: 11400000, guid: fcdb3282d8ed7e74687e7668027c38bd, type: 2}
+  - {fileID: 11400000, guid: e2edc82d18e312c49a256ccbc97b89e5, type: 2}
+  - {fileID: 11400000, guid: 06c8d30530c23854e91c8619210e0bec, type: 2}
+--- !u!114 &5444807990135476839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444807990135476837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e6049d3b00cefe42b92fe455e384484, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileMapToDrawTo: {fileID: 0}
+  myBuildingSprites: {fileID: 5444807990135476838}
