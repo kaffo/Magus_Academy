@@ -44,7 +44,43 @@ public class LecturerInfoFrameFiller : MonoBehaviour
                 desireText = "None";
                 break;
         }
-        lecturerDesiresText.text = "Desires to " + desireText + " magic";
+
+        string desiresText = "Desires to " + desireText + " magic";
+        List<MAGIC_SCHOOL> proficentList = new List<MAGIC_SCHOOL>();
+        List<MAGIC_SCHOOL> excelList = new List<MAGIC_SCHOOL>();
+
+        foreach (MAGIC_SCHOOL lecturerMagic in myLecturerStatsReference.lecturerSkills.Keys)
+        {
+            if (myLecturerStatsReference.lecturerSkills[lecturerMagic] > 0.3 && myLecturerStatsReference.lecturerSkills[lecturerMagic] < 0.65)
+            {
+                proficentList.Add(lecturerMagic);
+            } else if (myLecturerStatsReference.lecturerSkills[lecturerMagic] >= 0.65)
+            {
+                proficentList.Add(lecturerMagic);
+            }
+        }
+
+        if (proficentList.Count > 0)
+        {
+            desiresText = desiresText + "\nIs proficient in ";
+            foreach (MAGIC_SCHOOL lecturerMagic in proficentList)
+            {
+                desiresText = desiresText + lecturerMagic.ToString() + " & ";
+            }
+            desiresText = desiresText.Remove(desiresText.Length - 3, 2) + "magic";
+        }
+
+        if (excelList.Count > 0)
+        {
+            desiresText = desiresText + "\nnExcels in ";
+            foreach (MAGIC_SCHOOL lecturerMagic in excelList)
+            {
+                desiresText = desiresText + lecturerMagic.ToString() + " & ";
+            }
+            desiresText = desiresText.Remove(desiresText.Length - 3, 2) + "magic";
+        }
+
+        lecturerDesiresText.text = desiresText;
 
         string traitsText = "";
         for (int i = 0; i < myLecturerStatsReference.lecturerTraits.Count; i++)
