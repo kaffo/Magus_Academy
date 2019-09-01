@@ -75,7 +75,7 @@ public class StudentMovement : MonoBehaviour
 
     private void Update()
     {
-        if (myPolyNavAgent.hasPath) { return; }
+        if (!myPolyNavAgent.enabled || myPolyNavAgent.hasPath) { return; }
         switch (currentBehaviour)
         {
             case STUDENT_BEHAVIOUR.Wandering:

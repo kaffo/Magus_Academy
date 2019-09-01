@@ -73,7 +73,7 @@ public class LecturerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (myPolyNavAgent.hasPath) { return; }
+        if (!myPolyNavAgent.enabled || myPolyNavAgent.hasPath) { return; }
         switch (currentBehaviour)
         {
             case LECTURER_BEHAVIOUR.Wandering:

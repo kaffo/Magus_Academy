@@ -3,21 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using PolyNav;
 
-public class FoodHall : MonoBehaviour
+public class FoodHall : Building
 {
     public int capacity = 10;
 
     private HashSet<PolyNavAgent> reserveList;
-    private HashSet<StudentMovement> studentsInside;
-    private HashSet<LecturerMovement> lecturersInside;
-    private GameTime gameTime;
 
-    private void Awake()
+    protected override void Awake()
     {
         reserveList = new HashSet<PolyNavAgent>();
-        studentsInside = new HashSet<StudentMovement>();
-        lecturersInside = new HashSet<LecturerMovement>();
-        gameTime = TimeManager.Instance.currentTime;
+        base.Awake();
     }
 
     public bool ReservePlace(PolyNavAgent agentToReserve)
@@ -37,43 +32,21 @@ public class FoodHall : MonoBehaviour
             reserveList.Remove(agentToRemove);
     }
 
-    public void StudentEnter(StudentMovement studentMoveScript)
-    {
-        studentsInside.Add(studentMoveScript);
-        studentMoveScript.HideStudent();
-    }
-
-    public void StudentExit(StudentMovement studentMoveScript)
+    public override void StudentExit(StudentMovement studentMoveScript)
     {
         if (studentsInside.Contains(studentMoveScript))
         {
             CancelReservation(studentMoveScript.myPolyNavAgent);
-            studentsInside.Remove(studentMoveScript);
-            studentMoveScript.ShowStudent();
-        }
-        else
-        {
-            Debug.LogWarning("Student " + studentMoveScript.name + " tried to exit " + gameObject.name + " and failed");
+            base.StudentExit(studentMoveScript);
         }
     }
 
-    public void LecturerEnter(LecturerMovement lecturerMoveScript)
-    {
-        lecturersInside.Add(lecturerMoveScript);
-        lecturerMoveScript.HideLecturer();
-    }
-
-    public void LecturerExit(LecturerMovement lecturerMoveScript)
+    public override void LecturerExit(LecturerMovement lecturerMoveScript)
     {
         if (lecturersInside.Contains(lecturerMoveScript))
         {
             CancelReservation(lecturerMoveScript.myPolyNavAgent);
-            lecturersInside.Remove(lecturerMoveScript);
-            lecturerMoveScript.ShowLecturer();
-        }
-        else
-        {
-            Debug.LogWarning("Lecturer " + lecturerMoveScript.name + " tried to exit " + gameObject.name + " and failed");
+            base.LecturerExit(lecturerMoveScript);
         }
     }
 }
