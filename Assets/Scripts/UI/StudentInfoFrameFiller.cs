@@ -79,21 +79,7 @@ public class StudentInfoFrameFiller : MonoBehaviour
         }
         studentTraitsText.text = traitsText;
 
-        switch(myStudentStatsReference.studentLoyalty)
-        {
-            case STUDENT_LOYALTY.LOYAL:
-                loyaltyImage.sprite = loyalSprite;
-                break;
-            case STUDENT_LOYALTY.INDIFFERENT:
-                loyaltyImage.sprite = indifferentSprite;
-                break;
-            case STUDENT_LOYALTY.DISLOYAL:
-                loyaltyImage.sprite = disloyalSprite;
-                break;
-            default:
-                loyaltyImage.sprite = indifferentSprite;
-                break;
-        }
+        loyaltyImage.sprite = indifferentSprite;
     }
 
     public void EnrollStudent()

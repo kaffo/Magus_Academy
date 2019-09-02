@@ -68,7 +68,8 @@ SpriteRenderer:
   m_SortingLayerID: 1927905847
   m_SortingLayer: 1
   m_SortingOrder: 2
-  m_Sprite: {fileID: 257986831107531426, guid: 7ebf11c99a51601438846933e4db573b, type: 3}
+  m_Sprite: {fileID: -5693059113569006506, guid: 7ebf11c99a51601438846933e4db573b,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -147,7 +148,7 @@ SpriteRenderer:
   m_SortingLayerID: 1927905847
   m_SortingLayer: 1
   m_SortingOrder: 2
-  m_Sprite: {fileID: -3692389945340281925, guid: 7ebf11c99a51601438846933e4db573b,
+  m_Sprite: {fileID: -4773985656331652537, guid: 7ebf11c99a51601438846933e4db573b,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -210,8 +211,10 @@ MonoBehaviour:
   studentName: Student
   profilePicture: {fileID: 0}
   studentDesire: 0
+  studentSkills:
+    m_keys: 
+    m_values: []
   studentTraits: 
-  studentLoyalty: 1
 --- !u!114 &1701374674366269930
 MonoBehaviour:
   m_ObjectHideFlags: 0
