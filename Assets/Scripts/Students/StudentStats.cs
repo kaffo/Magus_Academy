@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using MageAcademy;
 
 public enum STUDENT_TRAITS
 {
@@ -19,6 +20,9 @@ public class StudentStats : MonoBehaviour
     public MAGIC_SCHOOL studentDesire = MAGIC_SCHOOL.NATURE;
     public MagicTypeFloatDictionary studentSkills;
     public List<STUDENT_TRAITS> studentTraits;
+    public float studyPeriod = 0.5f;
+
+    private float lastStudy = 0f;
 
     public void RandomiseStats()
     {
@@ -37,5 +41,15 @@ public class StudentStats : MonoBehaviour
         }
 
         studentDesire = (MAGIC_SCHOOL)UnityEngine.Random.Range(0, 2);
+    }
+
+    public void StudyMagic(MAGIC_SCHOOL schoolToStudy, float studyModifer)
+    {
+        // Only increment student skill if study cooldown has passed
+        if (lastStudy + studyPeriod < Time.time)
+        {
+            studentSkills[schoolToStudy] += Constants.STUDENT_LEARN_RATE * studyModifer;
+            lastStudy = Time.time;
+        }
     }
 }

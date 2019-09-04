@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: 7ebf11c99a51601438846933e4db573b
+guid: f7d314549bd21864d9a9647cac3c5bd0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 257986831107531426
-    second: NPC_test1_0
+      213: -6243135604804893726
+    second: NPC_teachers_0
   - first:
-      213: -5113562468020206127
-    second: NPC_test1_1
+      213: 1407891678628104526
+    second: NPC_teachers_1
   - first:
-      213: -5693059113569006506
-    second: NPC_test1_2
+      213: -2237262847330599084
+    second: NPC_teachers_2
   - first:
-      213: -3884165656053420771
-    second: NPC_test1_3
+      213: 2035020057392517565
+    second: NPC_teachers_3
   - first:
-      213: -3692389945340281925
-    second: NPC_test1_4
+      213: 3936650885304566675
+    second: NPC_teachers_4
   - first:
-      213: 7155696007648338661
-    second: NPC_test1_5
+      213: -6346797041333459375
+    second: NPC_teachers_5
   - first:
-      213: -8906684523634746325
-    second: NPC_test1_6
+      213: -7544098813927103249
+    second: NPC_teachers_6
   - first:
-      213: -4773985656331652537
-    second: NPC_test1_7
+      213: 4311451941967832947
+    second: NPC_teachers_7
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -55,7 +55,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: -1
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -108,7 +108,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: NPC_test1_0
+      name: NPC_teachers_0
       rect:
         serializedVersion: 2
         x: 0
@@ -122,14 +122,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 54e3ae85529326940b96254f3b8831a7
-      internalID: 257986831107531426
+      spriteID: 8bb3f4ac8e42f3a498ecaa4583fd2918
+      internalID: -6243135604804893726
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC_test1_1
+      name: NPC_teachers_1
       rect:
         serializedVersion: 2
         x: 32
@@ -143,14 +143,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a869309d642fbde4f910e034681f2e9c
-      internalID: -5113562468020206127
+      spriteID: fc1338f22ec717d4d83a8c250f79a7c6
+      internalID: 1407891678628104526
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC_test1_2
+      name: NPC_teachers_2
       rect:
         serializedVersion: 2
         x: 64
@@ -164,14 +164,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 49512409f4bde264b84feb33723e7393
-      internalID: -5693059113569006506
+      spriteID: 97b6ccc0cbc75ec40a92bfdc7578799c
+      internalID: -2237262847330599084
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC_test1_3
+      name: NPC_teachers_3
       rect:
         serializedVersion: 2
         x: 96
@@ -185,14 +185,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5fe77e32acae0aa449e746457fcb4ccd
-      internalID: -3884165656053420771
+      spriteID: 2fd70e32cb481254d847f44b5adaea3c
+      internalID: 2035020057392517565
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC_test1_4
+      name: NPC_teachers_4
       rect:
         serializedVersion: 2
         x: 0
@@ -206,14 +206,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2d33263822e20f049921ebbdbce2f83c
-      internalID: -3692389945340281925
+      spriteID: 5190868e85cb058428c4d17b245fb50c
+      internalID: 3936650885304566675
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC_test1_5
+      name: NPC_teachers_5
       rect:
         serializedVersion: 2
         x: 32
@@ -227,14 +227,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f0aedf6da2824e42bd1b93e69ed83c0
-      internalID: 7155696007648338661
+      spriteID: b768dea69e517224890492f75d160a8f
+      internalID: -6346797041333459375
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC_test1_6
+      name: NPC_teachers_6
       rect:
         serializedVersion: 2
         x: 64
@@ -248,14 +248,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3ae14d005400574e8d9f8e7c175255c
-      internalID: -8906684523634746325
+      spriteID: 1c7c2628f90f8cd43a6bebaa5df18856
+      internalID: -7544098813927103249
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC_test1_7
+      name: NPC_teachers_7
       rect:
         serializedVersion: 2
         x: 96
@@ -269,8 +269,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8979cbf37ecb58a4084bbce7182e156a
-      internalID: -4773985656331652537
+      spriteID: b222fa1f88b11034290c4faa1ba5adb3
+      internalID: 4311451941967832947
       vertices: []
       indices: 
       edges: []
@@ -278,7 +278,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: c54208a9d4ded644d83a8fdeb15d1e3d
+    spriteID: fd66c883bd0659b4a80ebd0f501be8dc
     internalID: 0
     vertices: []
     indices: 

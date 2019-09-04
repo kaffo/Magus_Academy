@@ -29,7 +29,7 @@ public class LecturerMovement : MonoBehaviour
         }
     }
 
-    private LecturerStats myLecturerStats
+    public LecturerStats myLecturerStats
     {
         get
         {

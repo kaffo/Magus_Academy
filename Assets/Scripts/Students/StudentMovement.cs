@@ -75,24 +75,38 @@ public class StudentMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!myPolyNavAgent.enabled || myPolyNavAgent.hasPath) { return; }
-        switch (currentBehaviour)
+        // We already have a destination set, no further pathing required
+        if (myPolyNavAgent.hasPath) { return; }
+
+        // We are in a building, check if we need to do any actions
+        if (!myPolyNavAgent.enabled)
         {
-            case STUDENT_BEHAVIOUR.Wandering:
-                WanderNearby();
-                break;
-            case STUDENT_BEHAVIOUR.Sleeping:
-                ReturnToDormitory();
-                break;
-            case STUDENT_BEHAVIOUR.Learning:
-                FindAndPathToClassroom();
-                break;
-            case STUDENT_BEHAVIOUR.Eating:
-                FindAndPathToFoodhall();
-                break;
-            default:
-                WanderNearby();
-                break;
+            switch (currentBehaviour)
+            {
+                case STUDENT_BEHAVIOUR.Learning:
+                    AttendClass();
+                    break;
+            }
+        } else // Not in a building, needs to determine path
+        {
+            switch (currentBehaviour)
+            {
+                case STUDENT_BEHAVIOUR.Wandering:
+                    WanderNearby();
+                    break;
+                case STUDENT_BEHAVIOUR.Sleeping:
+                    ReturnToDormitory();
+                    break;
+                case STUDENT_BEHAVIOUR.Learning:
+                    FindAndPathToClassroom();
+                    break;
+                case STUDENT_BEHAVIOUR.Eating:
+                    FindAndPathToFoodhall();
+                    break;
+                default:
+                    WanderNearby();
+                    break;
+            }
         }
     }
 
@@ -187,10 +201,21 @@ public class StudentMovement : MonoBehaviour
         myPolyNavAgent.SetDestination(destination);
     }
 
+    private void AttendClass()
+    {
+        if (currentClassroom == null)
+        {
+            Debug.LogWarning("Trying to study with no classroom set on " + gameObject.name);
+            return;
+        }
+
+        myStudentStats.StudyMagic(currentClassroom.classroomType, currentClassroom.GetSkillModifer());
+    }
+
     private void FindAndPathToClassroom()
     {
         currentClassroom = BuildingPlacement.Instance.FindClassroom(myStudentStats.studentDesire);
-        if (!currentClassroom)
+        if (currentClassroom == null)
         {
             Debug.LogWarning("Can't find a classroom for " + myStudentStats.studentDesire.ToString());
             currentBehaviour = STUDENT_BEHAVIOUR.Wandering;
@@ -206,7 +231,7 @@ public class StudentMovement : MonoBehaviour
 
     private void FindAndPathToFoodhall()
     {
-        if (!currentFoodhall)
+        if (currentFoodhall == null)
         {
             List<FoodHall> allFoodhalls = new List<FoodHall>(BuildingPlacement.Instance.corePoolObject.GetComponentsInChildren<FoodHall>());
             foreach (FoodHall foodHall in allFoodhalls)
@@ -219,7 +244,7 @@ public class StudentMovement : MonoBehaviour
             }
         }
 
-        if (!currentFoodhall)
+        if (currentFoodhall == null)
         {
             Debug.LogWarning("Student couldn't find a foodhall to eat in");
             currentBehaviour = STUDENT_BEHAVIOUR.Wandering;
