@@ -5,9 +5,13 @@ using MageAcademy;
 
 public class StudentNeeds : MonoBehaviour
 {
-    public float studentHunger = 1f;
+    public float studentHunger = 0f;
     public float studentBoredom = 0f;
     public float studentSleepiness = 0f;
+
+    public bool isBusy = false;
+    public bool isEating = false;
+    public bool isSleeping = false;
 
     private GameTime gameTime;
 
@@ -28,8 +32,29 @@ public class StudentNeeds : MonoBehaviour
 
     private void OnMinuteChange()
     {
-        studentHunger = Mathf.Clamp(studentHunger - Constants.STUDENT_HUNGER_RATE, 0f, 1f);
-        studentBoredom = Mathf.Clamp(studentBoredom + Constants.STUDENT_BOREDOM_RATE, 0f, 1f);
-        studentSleepiness = Mathf.Clamp(studentSleepiness + Constants.STUDENT_SLEEPINESS_RATE, 0f, 1f);
+        if (isEating)
+        {
+            studentHunger = Mathf.Clamp(studentHunger - Constants.STUDENT_HUNGER_DECREASE_RATE, 0f, 1f);
+        } else
+        {
+            studentHunger = Mathf.Clamp(studentHunger + Constants.STUDENT_HUNGER_INCREASE_RATE, 0f, 1f);
+        }
+        
+        if (isBusy)
+        {
+            studentBoredom = Mathf.Clamp(studentBoredom - Constants.STUDENT_BOREDOM_DECREASE_RATE, 0f, 1f);
+        } else
+        {
+            studentBoredom = Mathf.Clamp(studentBoredom + Constants.STUDENT_BOREDOM_INCREASE_RATE, 0f, 1f);
+        }
+        
+        if (isSleeping)
+        {
+            studentSleepiness = Mathf.Clamp(studentSleepiness - Constants.STUDENT_SLEEPINESS_DECREASE_RATE, 0f, 1f);
+        } else
+        {
+            studentSleepiness = Mathf.Clamp(studentSleepiness + Constants.STUDENT_SLEEPINESS_INCREASE_RATE, 0f, 1f);
+        }
+        
     }
 }

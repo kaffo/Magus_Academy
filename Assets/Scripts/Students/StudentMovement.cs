@@ -14,6 +14,7 @@ enum STUDENT_BEHAVIOUR
 }
 
 [RequireComponent(typeof(StudentStats))]
+[RequireComponent(typeof(StudentNeeds))]
 [RequireComponent(typeof(PolyNavAgent))]
 [RequireComponent(typeof(StudentFindAccommodation))]
 public class StudentMovement : MonoBehaviour
@@ -34,6 +35,14 @@ public class StudentMovement : MonoBehaviour
         get
         {
             return gameObject.GetComponent<StudentStats>();
+        }
+    }
+
+    private StudentNeeds myStudentNeeds
+    {
+        get
+        {
+            return gameObject.GetComponent<StudentNeeds>();
         }
     }
 
@@ -137,16 +146,19 @@ public class StudentMovement : MonoBehaviour
             if (currentBehaviour == STUDENT_BEHAVIOUR.Learning && TimeManager.Instance.GetCurrentTimeslot() != TIMESLOT.TEACHING && currentClassroom)
             {
                 currentClassroom.StudentExit(this);
+                myStudentNeeds.isBusy = false;
             }
             // Was sleeping, now leaving
             else if (currentBehaviour == STUDENT_BEHAVIOUR.Sleeping && TimeManager.Instance.GetCurrentTimeslot() != TIMESLOT.SLEEPING && myStudentAccommodationScript.myDormitory)
             {
                 myStudentAccommodationScript.myDormitory.StudentExit(this);
+                myStudentNeeds.isSleeping = false;
             }
             // Was eating, now leaving
             else if (currentBehaviour == STUDENT_BEHAVIOUR.Eating && TimeManager.Instance.GetCurrentTimeslot() != TIMESLOT.EATING && currentFoodhall)
             {
                 currentFoodhall.StudentExit(this);
+                myStudentNeeds.isEating = false;
             }
         }
 
@@ -209,7 +221,11 @@ public class StudentMovement : MonoBehaviour
             return;
         }
 
-        myStudentStats.StudyMagic(currentClassroom.classroomType, currentClassroom.GetSkillModifer());
+        float skillModifer = currentClassroom.GetSkillModifer();
+        myStudentStats.StudyMagic(currentClassroom.classroomType, skillModifer);
+
+        // Student is only entertained if they are being taught something
+        myStudentNeeds.isBusy = skillModifer > 0;
     }
 
     private void FindAndPathToClassroom()
@@ -267,6 +283,7 @@ public class StudentMovement : MonoBehaviour
                 break;
             case STUDENT_BEHAVIOUR.Sleeping:
                 myStudentAccommodationScript.myDormitory.StudentEnter(this);
+                myStudentNeeds.isSleeping = true;
                 break;
             case STUDENT_BEHAVIOUR.Learning:
                 if (currentClassroom)
@@ -274,7 +291,10 @@ public class StudentMovement : MonoBehaviour
                 break;
             case STUDENT_BEHAVIOUR.Eating:
                 if (currentFoodhall)
+                {
                     currentFoodhall.StudentEnter(this);
+                    myStudentNeeds.isEating = true;
+                }
                 break;
             default:
                 WanderNearby();
