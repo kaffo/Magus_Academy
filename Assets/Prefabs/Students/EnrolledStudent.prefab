@@ -170,8 +170,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6307433517411460446}
   - component: {fileID: 5227251622923409998}
-  - component: {fileID: 1701374674366269930}
+  - component: {fileID: 4349706461009594926}
   - component: {fileID: 7646271323465139466}
+  - component: {fileID: 1701374674366269930}
   - component: {fileID: 2321087911490316}
   m_Layer: 0
   m_Name: EnrolledStudent
@@ -215,6 +216,35 @@ MonoBehaviour:
     m_keys: 
     m_values: []
   studentTraits: 
+  studyPeriod: 0.5
+--- !u!114 &4349706461009594926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9153124987905076147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea06c3be03cbb3a4792c185084896467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  studentHunger: 1
+  studentBoredom: 0
+  studentSleepiness: 0
+--- !u!114 &7646271323465139466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9153124987905076147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26fe16e77ee5277449ea50313043dde5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myDormitory: {fileID: 0}
 --- !u!114 &1701374674366269930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,19 +275,6 @@ MonoBehaviour:
   restrict: 0
   closerPointOnInvalid: 1
   debugPath: 1
---- !u!114 &7646271323465139466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9153124987905076147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26fe16e77ee5277449ea50313043dde5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myDormitory: {fileID: 0}
 --- !u!114 &2321087911490316
 MonoBehaviour:
   m_ObjectHideFlags: 0
