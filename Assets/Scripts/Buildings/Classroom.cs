@@ -6,7 +6,7 @@ public enum MAGIC_SCHOOL
 {
     NONE = -1,
     NATURE,
-    ELEMENTAL
+    CONJURATION
 }
 
 public class Classroom : Building

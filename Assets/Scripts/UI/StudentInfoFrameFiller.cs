@@ -34,7 +34,7 @@ public class StudentInfoFrameFiller : MonoBehaviour
         string desireText;
         switch (myStudentStatsReference.studentDesire)
         {
-            case MAGIC_SCHOOL.ELEMENTAL:
+            case MAGIC_SCHOOL.CONJURATION:
                 desireText = "Elemental";
                 break;
             case MAGIC_SCHOOL.NATURE:

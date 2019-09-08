@@ -5,9 +5,13 @@ using UnityEngine;
 public class GameTime
 {
     public int minutes = 0;
-    public int hours = 12;
+    public int hours = 5;
     public int day = 0;
     public int month = 0;
+
+    public static int MINUTES_IN_HOUR = 100;
+    public static int HOURS_IN_DAY = 10;
+    public static int DAYS_IN_MONTH = 10;
 
     public delegate void OnMinuteIncrementDelegate();
     public event OnHourIncrementDelegate OnMinuteIncrement;
@@ -20,9 +24,9 @@ public class GameTime
 
     public void AddMinutes(int minsToAdd)
     {
-        if (minutes + minsToAdd >= 60)
+        if (minutes + minsToAdd >= MINUTES_IN_HOUR)
         {
-            AddMinutes(minsToAdd - 60);
+            AddMinutes(minsToAdd - MINUTES_IN_HOUR);
             AddHours(1);
         } else
         {
@@ -33,9 +37,9 @@ public class GameTime
 
     public void AddHours(int hoursToAdd)
     {
-        if (hours + hoursToAdd >= 24)
+        if (hours + hoursToAdd >= HOURS_IN_DAY)
         {
-            AddHours(hoursToAdd - 24);
+            AddHours(hoursToAdd - HOURS_IN_DAY);
             AddDays(1);
         } else
         {
@@ -46,9 +50,9 @@ public class GameTime
 
     public void AddDays(int daysToAdd)
     {
-        if (day + daysToAdd > 30)
+        if (day + daysToAdd > DAYS_IN_MONTH)
         {
-            AddDays(daysToAdd - 30);
+            AddDays(daysToAdd - DAYS_IN_MONTH);
             AddMonths(1);
         }
         else
@@ -83,11 +87,11 @@ public class TimeManager : Singleton<TimeManager>
 
     private void Awake()
     {
-        for (int i = 0; i < 24; i++)
+        for (int i = 0; i < GameTime.HOURS_IN_DAY; i++)
         {
-            if (i < 7 || i > 19) { timeslotsSetup.Add(TIMESLOT.SLEEPING); }
-            else if (i == 11 || i == 15 || i == 16) { timeslotsSetup.Add(TIMESLOT.TEACHING); }
-            else if (i == 12 || i == 13) { timeslotsSetup.Add(TIMESLOT.EATING); }
+            if (i < 3 || i > 9) { timeslotsSetup.Add(TIMESLOT.SLEEPING); }
+            else if (i == 3 || i == 7 || i == 8) { timeslotsSetup.Add(TIMESLOT.TEACHING); }
+            else if (i == 4 || i == 5) { timeslotsSetup.Add(TIMESLOT.EATING); }
             else { timeslotsSetup.Add(TIMESLOT.NONE); }
         }
     }
