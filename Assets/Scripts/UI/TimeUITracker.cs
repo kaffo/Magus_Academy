@@ -28,6 +28,11 @@ public class TimeUITracker : MonoBehaviour
         for (int i = 0; i < numOfTimeslots; i++)
         {
             GameObject timeNode = Instantiate(timeNodePrefab, transform);
+            TimeNodeFiller timeNodeFillerScript = timeNode.GetComponent<TimeNodeFiller>();
+            if (timeNodeFillerScript)
+            {
+                timeNodeFillerScript.myTimeslot = TimeManager.Instance.timeslotsSetup[i];
+            }
         }
 
         // Sets the width of the parent container so there's no whitespace between nodes
