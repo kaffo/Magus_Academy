@@ -31,7 +31,8 @@ public class GameTime
         } else
         {
             minutes += minsToAdd;
-            OnMinuteIncrement();
+            if (OnMinuteIncrement != null)
+                OnMinuteIncrement();
         }
     }
 
@@ -44,7 +45,8 @@ public class GameTime
         } else
         {
             hours += hoursToAdd;
-            OnHourIncrement();
+            if (OnHourIncrement != null)
+                OnHourIncrement();
         }
     }
 
@@ -58,7 +60,8 @@ public class GameTime
         else
         {
             day += daysToAdd;
-            OnDayIncrement();
+            if (OnDayIncrement != null)
+                OnDayIncrement();
         }
     }
 
