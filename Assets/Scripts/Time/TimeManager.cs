@@ -22,6 +22,9 @@ public class GameTime
     public delegate void OnDayIncrementDelegate();
     public event OnDayIncrementDelegate OnDayIncrement;
 
+    public delegate void OnMonthIncrementDelegate();
+    public event OnMonthIncrementDelegate OnMonthIncrement;
+
     public void AddMinutes(int minsToAdd)
     {
         if (minutes + minsToAdd >= MINUTES_IN_HOUR)
@@ -68,6 +71,7 @@ public class GameTime
     public void AddMonths(int monthsToAdd)
     {
         month += monthsToAdd;
+        OnMonthIncrement();
     }
 }
 
