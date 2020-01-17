@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c44cf317917d14c4ead82987d9a215af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startCoords: {x: 10, y: 10, z: 0}
+  startCoords: {x: 40, y: 40, z: 0}
   endCoords: {x: -40, y: -40, z: 0}
   moveSpeed: 0.01
 --- !u!114 &6495044908030302785

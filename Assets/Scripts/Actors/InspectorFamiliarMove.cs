@@ -16,5 +16,10 @@ public class InspectorFamiliarMove : MonoBehaviour
     void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, endCoords, moveSpeed);
+        if (Vector3.Distance(transform.position, endCoords) <= moveSpeed)
+        {
+            Debug.Log($"Inspector Finished Tour at {transform.position}");
+            Destroy(gameObject);
+        }
     }
 }
