@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class RankingStats : MonoBehaviour
 {
-    public string UniversityName = "University";
+    public string universityName = "University";
     [Range(1,100)]
     public int currentRanking = 1;
+    public int studentNumber = 0;
+    public int lecturerNumber = 0;
+    public int money = 0;
 }

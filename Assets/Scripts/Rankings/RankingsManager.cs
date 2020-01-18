@@ -114,6 +114,7 @@ public class RankingsManager : Singleton<RankingsManager>
     public GameObject rankingContainer;
 
     private GameTime gameTime;
+    private List<RankingStats> rankingStatList;
 
     private void Start()
     {
@@ -125,6 +126,9 @@ public class RankingsManager : Singleton<RankingsManager>
         }
 
         gameTime = TimeManager.Instance.currentTime;
+        gameTime.OnMonthIncrement += OnMonthChange;
+        gameTime.OnDayIncrement += OnFirstDay;
+        rankingStatList = new List<RankingStats>();
 
         PopulateRankings();
     }
@@ -138,8 +142,12 @@ public class RankingsManager : Singleton<RankingsManager>
             RankingStats currentStats = currentRanking.GetComponent<RankingStats>();
             if (currentStats != null)
             {
-                currentStats.UniversityName = UniversityNames[i];
-                currentStats.currentRanking = i + 1;
+                currentStats.universityName = UniversityNames[i];
+                currentStats.currentRanking = 0; // Unranked until end of day 1
+                currentStats.lecturerNumber = 1;
+                // Add randomizer to non-player Universities
+                currentRanking.AddComponent<UniversityStatsRandomizer>();
+                rankingStatList.Add(currentStats);
             }
         }
         GameObject playerRanking = Instantiate(universityRankingPrefab, rankingContainer.transform);
@@ -147,8 +155,47 @@ public class RankingsManager : Singleton<RankingsManager>
         RankingStats playerStats = playerRanking.GetComponent<RankingStats>();
         if (playerStats != null)
         {
-            playerStats.UniversityName = "Player University";
-            playerStats.currentRanking = 100;
+            playerStats.universityName = "Player University";
+            playerStats.currentRanking = 0; // Unranked until end of day 1
+            playerRanking.AddComponent<PlayerUniversityStatsUpdate>();
+            rankingStatList.Add(playerStats);
         }
+    }
+
+    public void UpdateRankings()
+    {
+        Dictionary<int, RankingStats> rankDict = new Dictionary<int, RankingStats>();
+
+        foreach (RankingStats currentRanking in rankingStatList)
+        {
+            // A terrible caclulation which needs changed
+            int score = (currentRanking.studentNumber * 10) + (currentRanking.lecturerNumber * 1000) + currentRanking.money;
+            while (rankDict.ContainsKey(score))
+            {
+                score++;
+            }
+            rankDict.Add(score, currentRanking);
+        }
+
+        // Get the cacluated scores and sort them
+        List<int> scoreList = new List<int>(rankDict.Keys);
+        scoreList.Sort((a, b) => b.CompareTo(a));
+
+        for (int i = 0; i < scoreList.Count; i++)
+        {
+            rankDict[scoreList[i]].currentRanking = i + 1;
+        }
+    }
+
+    private void OnFirstDay()
+    {
+        // Update rankings at end of Day 1 then remove the event listener
+        UpdateRankings();
+        gameTime.OnDayIncrement -= OnFirstDay;
+    }
+
+    private void OnMonthChange()
+    {
+        UpdateRankings();
     }
 }
