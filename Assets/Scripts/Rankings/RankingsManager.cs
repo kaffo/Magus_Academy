@@ -126,7 +126,7 @@ public class RankingsManager : Singleton<RankingsManager>
         }
 
         gameTime = TimeManager.Instance.currentTime;
-        gameTime.OnMonthIncrement += OnMonthChange;
+        gameTime.OnYearIncrement += OnYearChange;
         gameTime.OnDayIncrement += OnFirstDay;
         rankingStatList = new List<RankingStats>();
 
@@ -169,7 +169,7 @@ public class RankingsManager : Singleton<RankingsManager>
         foreach (RankingStats currentRanking in rankingStatList)
         {
             // A terrible caclulation which needs changed
-            int score = (currentRanking.studentNumber * 10) + (currentRanking.lecturerNumber * 1000) + currentRanking.money;
+            int score = (currentRanking.studentNumber * 10) + (currentRanking.lecturerNumber * 1000) + currentRanking.money - (int)currentRanking.auditDeductions;
             while (rankDict.ContainsKey(score))
             {
                 score++;
@@ -194,7 +194,7 @@ public class RankingsManager : Singleton<RankingsManager>
         gameTime.OnDayIncrement -= OnFirstDay;
     }
 
-    private void OnMonthChange()
+    private void OnYearChange()
     {
         UpdateRankings();
     }

@@ -58640,6 +58640,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1831627264}
   - component: {fileID: 1831627265}
+  - component: {fileID: 1831627266}
   m_Layer: 0
   m_Name: InspectorManager
   m_TagString: Untagged
@@ -58677,6 +58678,18 @@ MonoBehaviour:
   familiarInspectorPrefab: {fileID: 6495044908030302788, guid: bc775a29111dfb54ab751f4d18c8b5ec,
     type: 3}
   inspectorPool: {fileID: 1735252229}
+--- !u!114 &1831627266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831627263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b2f099da4ccdc647963b1ec256ebe46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1833340773
 GameObject:
   m_ObjectHideFlags: 0

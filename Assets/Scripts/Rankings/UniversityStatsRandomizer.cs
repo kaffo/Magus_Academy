@@ -45,6 +45,9 @@ public class UniversityStatsRandomizer : MonoBehaviour
             myRankingStats.money -= Random.Range(10, 100);
         }
 
+        // 15% chance to get random fine
+        myRankingStats.auditDeductions = Random.value > 0.85 ? Random.Range(500,5000) : 0;
+
         // Don't let values fall below 0
         myRankingStats.studentNumber = myRankingStats.studentNumber < 0 ? 0 : myRankingStats.studentNumber;
         myRankingStats.lecturerNumber = myRankingStats.lecturerNumber < 0 ? 0 : myRankingStats.lecturerNumber;

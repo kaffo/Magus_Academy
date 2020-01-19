@@ -8,6 +8,7 @@ public class InspectorCircle : MonoBehaviour
     public GameObject visibleDisk;
 
     private List<GameObject> seenStudents;
+    private List<GameObject> seenLecturers;
     private List<GameObject> seenBuildings;
 
     private void Start()
@@ -19,6 +20,7 @@ public class InspectorCircle : MonoBehaviour
         }
 
         seenStudents = new List<GameObject>();
+        seenLecturers = new List<GameObject>();
         seenBuildings = new List<GameObject>();
     }
 
@@ -29,21 +31,34 @@ public class InspectorCircle : MonoBehaviour
         {
             GameObject currentGameObject = collider.gameObject;
             StudentMovement studentMoveScript = currentGameObject.GetComponent<StudentMovement>();
+            LecturerMovement lecturerMoveScript = currentGameObject.GetComponent<LecturerMovement>();
             Building buildingScript = currentGameObject.GetComponent<Building>();
 
-            if (!seenStudents.Contains(currentGameObject) && studentMoveScript != null)
+            if (studentMoveScript != null && !seenStudents.Contains(currentGameObject))
             {
                 Debug.Log($"Inspector noted {currentGameObject.GetComponent<StudentStats>().studentName}");
                 seenStudents.Add(currentGameObject);
                 break;
             }
 
-            if (!seenBuildings.Contains(currentGameObject) && buildingScript != null)
+            if (lecturerMoveScript != null && !seenLecturers.Contains(currentGameObject))
+            {
+                Debug.Log($"Inspector noted {currentGameObject.GetComponent<LecturerStats>().lecturerName}");
+                seenLecturers.Add(currentGameObject);
+                break;
+            }
+
+            if (buildingScript != null && !seenBuildings.Contains(currentGameObject))
             {
                 Debug.Log($"Inspector noted {buildingScript.name}");
                 seenBuildings.Add(currentGameObject);
                 break;
             }
         }
+    }
+
+    public void ProvideAuditUpdate()
+    {
+        AuditManager.Instance.ProvideAuditUpdate(seenStudents, seenLecturers, seenBuildings);
     }
 }

@@ -6,12 +6,14 @@ public class GameTime
 {
     public int minutes = 0;
     public int hours = 5;
-    public int day = 0;
-    public int month = 0;
+    public int day = 1;
+    public int month = 1;
+    public int year = 1;
 
     public static int MINUTES_IN_HOUR = 100;
     public static int HOURS_IN_DAY = 10;
     public static int DAYS_IN_MONTH = 10;
+    public static int MONTHS_IN_YEAR = 4;
 
     public delegate void OnMinuteIncrementDelegate();
     public event OnHourIncrementDelegate OnMinuteIncrement;
@@ -24,6 +26,9 @@ public class GameTime
 
     public delegate void OnMonthIncrementDelegate();
     public event OnMonthIncrementDelegate OnMonthIncrement;
+
+    public delegate void OnYearIncrementDelegate();
+    public event OnYearIncrementDelegate OnYearIncrement;
 
     public void AddMinutes(int minsToAdd)
     {
@@ -70,8 +75,24 @@ public class GameTime
 
     public void AddMonths(int monthsToAdd)
     {
-        month += monthsToAdd;
-        OnMonthIncrement();
+        if (month + monthsToAdd > MONTHS_IN_YEAR)
+        {
+            AddMonths(monthsToAdd - MONTHS_IN_YEAR);
+            AddYear(1);
+        }
+        else
+        {
+            month += monthsToAdd;
+            if (OnMonthIncrement != null)
+                OnMonthIncrement();
+        }
+    }
+
+    public void AddYear(int yearsToAdd)
+    {
+        year += yearsToAdd;
+        if (OnYearIncrement != null)
+            OnYearIncrement();
     }
 }
 

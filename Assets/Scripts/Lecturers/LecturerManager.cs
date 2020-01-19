@@ -33,7 +33,7 @@ public class LecturerManager : Singleton<LecturerManager>
     public GameObject selectionPoolGameObject;
     public GameObject hiredPoolGameObject;
 
-    private int m_currentLecturerCapacity = 3;
+    private int m_currentLecturerCapacity = 1;
 
 
     private void Start()

@@ -10,4 +10,5 @@ public class RankingStats : MonoBehaviour
     public int studentNumber = 0;
     public int lecturerNumber = 0;
     public int money = 0;
+    public int auditDeductions = 0;
 }

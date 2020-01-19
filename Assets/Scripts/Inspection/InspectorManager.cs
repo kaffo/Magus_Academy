@@ -24,8 +24,7 @@ public class InspectorManager : Singleton<InspectorManager>
         }
 
         gameTime = TimeManager.Instance.currentTime;
-        // TODO Make this go back to months
-        gameTime.OnDayIncrement += OnMonthChange;
+        gameTime.OnMonthIncrement += OnMonthChange;
     }
 
     public void SpawnInspector()
